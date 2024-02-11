@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Spicy+Rice&display=swap" rel="stylesheet">
     <script defer src="js/mastermind.js"></script>
-    <title>Document</title>
+    <title>Find the Mole!</title>
 </head>
 <body>
     <header>
@@ -20,12 +20,12 @@
                 <div class="panelTwo"><img src="assets/mystery.png" alt="Illustration of a person in silhouette with question mark."></div>
                 <div class="panelThree"><img src="assets/mystery.png" alt="Illustration of a person in silhouette with question mark."></div>
                 <div class="panelFour"><img src="assets/mystery.png" alt="Illustration of a person in silhouette with question mark."></div>
-                <div class="space">settings</div>
+                <div class="settings"><img src="assets/icon-tune-40.svg" alt="Icon for settings."></div>
             </div>
         </section>
     </header>
 
-    <section id="history">Guess history section</section>
+    <section id="history"></section>
    
     <section id="guess">
         <div class="guessTurn">
@@ -34,10 +34,17 @@
                 <div class="panelTwo"><img src="assets/green.gif" alt="Illustration of a lady with a hat on a green background."></div>
                 <div class="panelThree"><img src="assets/green.gif" alt="Illustration of a lady with a hat on a green background."></div>
                 <div class="panelFour"><img src="assets/green.gif" alt="Illustration of a lady with a hat on a green background."></div>
-                <div class="codeCheck">code feedback </div>
+                <div class="codeCheck"><h2>&#9679;&#9675;&#9675;&#9675;</h2></div>
             </div>
         </div>
-        <section id="controls">UI: reset, clear guess, submit guess</section>
+        <section id="controls">
+            <div id="turnCount"><h3>Turn 0 of 12</h3></div>
+            <div id="actions">
+                <img src="assets/icon-refresh-48.svg" alt="Icon for starting a new game.">
+                <img src="assets/icon-cancel-48.svg" alt="Icon for cancelling guesses.">
+                <img src="assets/icon-check-48.svg" alt="Icon for submitting guesses.">
+            </div>
+        </section>
     </section>
     
 </body>

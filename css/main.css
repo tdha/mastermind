@@ -8,45 +8,97 @@ body {
   height: 100vh;
   font-family: "Inter", sans-serif;
   width: 100%;
-  height: 100vh;
-  max-width: 480px;
+  /* max-width: 1000px; */
   margin: auto;
-  padding: 0 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-image: url("../assets/pattern-circles-crosses.png");
+  background-repeat: repeat repeat;
+  background-position: center;
 }
 
 header {
+  padding: 36px 12px 12px 12px;
   padding-top: 36px;
+  background-color:rgba(176, 190, 197, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
 }
 
 h1 {
   font-family: "Luckiest Guy", cursive;
-  font-size: 42px;
+  font-size: 60px;
   color: #37474F;
+  margin-bottom: 12px;
 }
 
 img {
   max-width: 100%;
   width: auto;
   height: auto;
+  place-self: center;
+}
+
+#code {
+  padding-top: 12px;
+  max-width: 1000px;
 }
 
 .computerCode {  
-  background-color: #FAFAFA;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 2px;
 }
 
-.guessCode {  
-  background-color: #FAFAFA;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 2px;
+#history {
+  padding: 0 12px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 #guess {
-  padding-bottom: 12px;
+  padding: 16px 12px 24px 12px;
+  background-color:rgba(255, 249, 196, 0.8);
+  border-top: 1px solid #FFF9C4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+}
+
+.guessCode {  
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+}
+
+.guessTurn {
+  max-width: 1000px;
+}
+
+@media screen and (max-width: 992px) {
+  body {
+    max-width: 992px;
+    background-size: 50%;
+}
+  h1 {
+    font-size: 42px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    max-width: 768px;
+    background-size: 60%;
+}
+}
+
+@media screen and (max-width: 575px) {
+  body {
+      max-width: 575px;
+      background-size: 75%;
+  }
 }

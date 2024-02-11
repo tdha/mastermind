@@ -8,7 +8,6 @@ body {
   height: 100vh;
   font-family: "Inter", sans-serif;
   width: 100%;
-  /* max-width: 1000px; */
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -39,6 +38,11 @@ h2 {
   font-size: 48px;
 }
 
+h3 {
+  font-family: "Luckiest Guy", cursive;
+  font-size: 88px;
+}
+
 img {
   max-width: 100%;
   width: auto;
@@ -57,16 +61,17 @@ img {
   gap: 2px;
 }
 
-.settings {
-  display: grid;
-  place-items: center;
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.settings > img {
+.timer > img {
   width: 52px;
-  color: #1565C0;
 }
-.settings > img:hover {
-  transform: scale(1.25);
+
+.icon:hover {
+  transform: scale(1.2);
   transition: transform 150ms ease-in;
 }
 
@@ -109,58 +114,46 @@ img {
 }
 
 #controls {  
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
   margin-top: 24px;
   width: 100%;
   max-width: 1000px;
-  align-items: center;
+  /* align-items: center; */
 } 
 
-#turnCount {
-  flex: 3;
-}
-
 #actions {
-  flex: 2;
+  /* flex: 5; */
   display: flex;
   flex-direction: row;
-  justify-content: end;
-}
-
-#actions > img {
-  padding-left: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
 }
 
 @media screen and (max-width: 992px) {
   body {
     max-width: 992px;
     background-size: 50%;
-}
-  h1 {
-    font-size: 42px;
   }
-  .settings > img {
-    width: 48px;
+    h1 {
+      font-size: 42px;
+    }
+    h3 {
+      font-size: 76px;
   }
-  /* #actions > img {
-    padding-left: 72px;
-  } */
 }
 
 @media screen and (max-width: 768px) {
   body {
     max-width: 768px;
     background-size: 60%;
-}
-h2 {
-  font-size: 36px;
-}
-  .settings > img {
-    width: 44px;
   }
-  #actions > img {
-    padding-left: 48px;
+  h2 {
+    font-size: 36px;
+  }
+  h3 {
+    font-size: 60px;
   }
 }
 
@@ -172,7 +165,7 @@ h2 {
   h2 {
     font-size: 28px;
   }
-  .settings > img {
-    width: 40px;
+  h3 {
+    font-size: 48px;
   }
 }

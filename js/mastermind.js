@@ -1,14 +1,14 @@
 /*----- constants -----*/
 const PERSON = {
-    green: '../assets/green.gif', 
-    red: '../assets/red.png',
-    blue: '../assets/blue.png',
-    purple: '../assets/purple.png',
-    orange: '../assets/orange.png',
-    yellow: '../assets/yellow.png',
+    green: 'assets/green.gif', 
+    red: 'assets/red.png',
+    blue: 'assets/blue.png',
+    purple: 'assets/purple.png',
+    orange: 'assets/orange.png',
+    yellow: 'assets/yellow.png',
 };
 
-const MYSTERY = '../assets/mystery.png';
+const MYSTERY = 'assets/mystery.png';
 
 const PEG = {
     blackPeg: '&#9679;',

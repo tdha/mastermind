@@ -69,9 +69,6 @@ img {
   align-items: center;
   justify-content: center;
 }
-.timer > img {
-  width: 52px;
-}
 
 .icon:hover {
   transform: scale(1.2);

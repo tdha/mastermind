@@ -38,6 +38,9 @@ let winner;
     // 'win' = guess === computerCode && turn > 0;
 let computerCode;
 let history;
+let timerInterval;
+    // variable to store the interval for the timer countdown.
+let turnCountdown = 12;
 
 /*----- cached elements  -----*/
 const message = document.querySelector('h1');
@@ -56,17 +59,41 @@ init();
 function init() {
     winner = null;
         // Winner is cleared i.e. no winner
-    message.innerText = 'Find the moles!';
-    computerCode = '';
-        // computerCode is default i.e. 4 * mystery.png
-    computerCode.children = document.querySelector('div').appendChild(MYSTERY);
-    turn = 12;
+
+    message.innerText = 'Mastermole!';
+
+    const computerCode = document.querySelector('.computerCode')
+    computerCode.innerHTML = '';
+        // clear existing content in computerCode
+
     history = '';
         // history is cleared
     currentGuess = '';
         // currentGuess is empty
     check = '';
         // checkGuess is hidden; visible when turn is submitted
+
+    // Resetting the computer code's portrait images to MYSTERY.
+    for (let i = 0; i < 4; i++) {
+        const panelDiv = document.createElement('div');
+            // create new dvis
+        panelDiv.classList.add('panel' + (i + 1));
+            // add the classes
+        const mysteryImg = document.createElement('img');
+            // create img tags
+        mysteryImg.src = MYSTERY;
+        mysteryImg.alt = 'Illustration of a person in silhouette with question mark.';
+        panelDiv.appendChild(mysteryImg);
+        computerCode.appendChild(panelDiv);
+            // insert MYSTERY image into each div within computerCode
+    }
+
+    // create and append the timer div
+    const timerDiv = document.createElement('div');
+    timerDiv.classList.add('timer');
+    timerDiv.innerHTML = '<h3>12</h3>'
+        // initial countdown value
+    computerCode.appendChild(timerDiv);
 }
 
 function render() {

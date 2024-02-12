@@ -116,12 +116,17 @@ function shuffle(array) {
     }
     return array;
 }
-    // generating secret code
+    // generating secret code that allows for duplicates
 function generateSecretCode() {
     const shuffledPeople = shuffle(people);
         // shuffle PEOPLE array
-    const secretCode = shuffledPeople.slice(0, 4);
-        // select the first four poeple from the shuffle array
+    const secretCode = [];
+    for (let i = 0; i < 4; i++) {
+        // iterates for times for each code sequence
+        const randomIndex = Math.floor(Math.random() * shuffledPeople.length);
+            // selects a random value with each iteration
+        secretCode.push(shuffledPeople[randomIndex]);
+    }
     return secretCode;
 };
 

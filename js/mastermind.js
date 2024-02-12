@@ -81,28 +81,14 @@ window.addEventListener("click", function(event) {
     });
 
 
-function modalSelect() {
-    let selectedPanel;
-
-    // Add event listeners to each colored portrait in the modal
-    document.querySelectorAll('.modalContent img').forEach(portrait => {
-        portrait.addEventListener('click', function() {
-            const newSource = portrait.src;
-
-            if (selectedPanel) {
-                const imageInPanel = selectedPanel.querySelector('img');
-                if (imageInPanel) {
-                    imageInPanel.src = newSource;
-                }
-            }
-            modal.style.display = 'none';
-        });
-    });
+function modalSelect(guessCode) {
+    let selectedPanel; // Move selectedPanel declaration to the outer scope
 
     // Add event listener to each panel div to track the selected panel
     document.querySelectorAll('.guessCode > div').forEach(panel => {
         panel.addEventListener('click', function() {
             selectedPanel = panel;
+            console.log("Selected panel:", selectedPanel);
             // Highlight the selected panel or add any other visual indication if needed
             panel.classList.add('activeGuessBorder');
 
@@ -115,9 +101,81 @@ function modalSelect() {
             });
         });
     });
+
+    // Add event listeners to each colored portrait in the modal
+    document.querySelectorAll('.modalContent img').forEach(portrait => {
+        portrait.addEventListener('click', function() {
+            const newSource = portrait.src;
+            console.log("Event listener for portrait in modal");
+            console.log("Selected panel:", selectedPanel);
+            if (selectedPanel) {
+                console.log("Panel found:", selectedPanel);
+                const imageInPanel = selectedPanel.querySelector('img');
+                if (imageInPanel) {
+                    console.log("Image found in panel:", imageInPanel);
+                    console.log("New source:", newSource);
+                    imageInPanel.src = newSource;
+                    console.log("imageInPanel = newSource");
+                } else {
+                    console.log("No image found in selected panel");
+                }
+            } else {
+                console.log("No panel selected");
+            }
+            modal.style.display = 'none';
+        });
+    });
 }
 
+ 
+function clearGuess(guessCode) {
+    // Resetting the guess area's portrait images to ANONYMOUS.
+    for (let i = 0; i < 4; i++) {
+        const guessPanel = document.createElement('div');
+            // create new dvis
+        guessPanel.classList.add('panel' + (i + 1));
+            // add the classes
+        guessPanel.id = 'buttonModal'
+            // add the ID attribute
+        const anonymousImg = document.createElement('img');
+            // create img tags
+        anonymousImg.src = ANONYMOUS    ;
+        anonymousImg.alt = 'Illustration of a person in silhouette.';
+        guessPanel.appendChild(anonymousImg);
+        guessCode.appendChild(guessPanel);
+            // insert ANONYMOUS image into each div within guessCode
     
+            // attach event listener to div to open modal
+            guessPanel.addEventListener('click', function() {
+                modal.style.display = 'block';
+                guessPanel.classList.add('activeGuessBorder');
+                    // to highlight active guess
+            });
+    }
+
+    // When the modal closes via click(x), remove the 'activeGuessBorder' class from all panels
+    span.addEventListener("click", function() {
+        modal.style.display = "none";
+        const guessPanels = document.querySelectorAll('.guessCode > div');
+        guessPanels.forEach(panel => {
+            panel.classList.remove('activeGuessBorder'); 
+            // Remove class when modal closes
+        });
+    });
+
+    // When the modal closes via outside of modal, remove the 'activeGuessBorder' class from all panels
+    window.addEventListener("click", function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        const guessPanels = document.querySelectorAll('.guessCode > div');
+        guessPanels.forEach(panel => {
+            panel.classList.remove('activeGuessBorder'); 
+            // Remove class when modal closes
+            });
+        }
+    });
+}
+
 
 
 init();
@@ -173,66 +231,23 @@ function init() {
     computerCode.appendChild(turnDiv);
 
 
-
-    // Resetting the guess area's portrait images to ANONYMOUS.
-    for (let i = 0; i < 4; i++) {
-        const guessPanel = document.createElement('div');
-            // create new dvis
-        guessPanel.classList.add('panel' + (i + 1));
-            // add the classes
-        guessPanel.id = 'buttonModal'
-            // add the ID attribute
-        const anonymousImg = document.createElement('img');
-            // create img tags
-        anonymousImg.src = ANONYMOUS    ;
-        anonymousImg.alt = 'Illustration of a person in silhouette.';
-        guessPanel.appendChild(anonymousImg);
-        guessCode.appendChild(guessPanel);
-            // insert ANONYMOUS image into each div within guessCode
-    
-            // attach event listener to div to open modal
-            guessPanel.addEventListener('click', function() {
-                modal.style.display = 'block';
-                guessPanel.classList.add('activeGuessBorder');
-                    // to highlight active guess
-            });
-    }
-
-    // When the modal closes via click(x), remove the 'activeGuessBorder' class from all panels
-    span.addEventListener("click", function() {
-        modal.style.display = "none";
-        const guessPanels = document.querySelectorAll('.guessCode > div');
-        guessPanels.forEach(panel => {
-            panel.classList.remove('activeGuessBorder'); 
-            // Remove class when modal closes
-        });
-    });
-
-    // When the modal closes via outside of modal, remove the 'activeGuessBorder' class from all panels
-    window.addEventListener("click", function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        const guessPanels = document.querySelectorAll('.guessCode > div');
-        guessPanels.forEach(panel => {
-            panel.classList.remove('activeGuessBorder'); 
-            // Remove class when modal closes
-            });
-        }
-    });
-
     // create and append the codeCheck div
     const codeCheckDiv = document.createElement('div');
     codeCheckDiv.classList.add('codeCheck');
     codeCheckDiv.innerHTML = '<h2>&#9679;&#9675;&#9675;&#9675;</h2>'
     guessCode.appendChild(codeCheckDiv);
 
-    modalSelect();
+
+    modalSelect(guessCode);
+    // console.log("modalSelect inside init");
+    clearGuess(guessCode);
 
 }
 
 function render() {
     // QUESTION: what needs to go here?
 }
+
 
 // generate a secret code from shuffling PEOPLE
     // found: Fisher-Yates shuffle algorithm (Knuth shuffle)
@@ -243,6 +258,8 @@ function shuffle(array) {
     }
     return array;
 }
+
+
     // generating secret code that allows for duplicates
 function generateSecretCode() {
     const shuffledPeople = shuffle(people);
@@ -265,12 +282,6 @@ function generateSecretCode() {
     // guess now shows in history (scrollable)
     // guess in history shows checkGuess (black peg, white peg, null)
     // turn -1
-function makeGuess() {
-    // click square in currentGuess
-        // currentGuess.getElementByClass('currentTurn > guessCode > panelOne')
-    // select PERSON from popup (TODO)
-    // selection = panelOne
-}
 
 function submitGuess() {
     // if all panels(4) have selections
@@ -281,10 +292,6 @@ function submitGuess() {
 }
 
 function checkGuess() {
-
-}
-
-function clearGuess() {
 
 }
 

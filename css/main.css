@@ -43,11 +43,14 @@ h3 {
   font-size: 88px;
 }
 
+button {
+  border: none;
+}
+
 img {
   max-width: 100%;
   width: auto;
   height: auto;
-  place-self: center;
 }
 
 #code {
@@ -83,18 +86,18 @@ img {
 
 #guess {
   padding: 16px 12px 24px 12px;
-  background-color:rgba(255, 249, 196, 0.8);
+  background-color:rgba(239, 235, 233, 0.8);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: left;
 }
 
-.guessTurn {
+.currentTurn {
   max-width: 1000px;
 }
 
-.guessCode {  
+.guessCode {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 2px;
@@ -129,6 +132,49 @@ img {
   justify-content: center;
   align-items: center;
   gap: 24px;
+}
+
+#guessModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+}
+
+.modalContent {
+  background-color: #ffffff;
+  margin: auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 720px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2px;
+  place-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 992px) {

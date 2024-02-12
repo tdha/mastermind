@@ -59,31 +59,66 @@ clearGuessButton.addEventListener('click', clearGuess);
 /*----- functions -----*/
 
 // guess selection modal
-// Get the modal
 const modal = document.getElementById("guessModal");
-
-// Get the button that opens the modal
+    // Get the modal
 const buttonOpenModal = document.getElementById("buttonModal");
-
-// Get the <span> element that closes the modal
+    // Get the button that opens the modal
 const span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
+    // Get the <span> element that closes the modal
 buttonOpenModal.addEventListener("click", function() {
     modal.style.display = "block";
-});
-
-// When the user clicks on <span> (x), close the modal
+    // When the user clicks the button, open the modal 
+    });
 span.addEventListener("click", function() {
     modal.style.display = "none";
-});
-
-// When the user clicks anywhere outside of the modal, close it
+    // When the user clicks on <span> (x), close the modal
+    });
 window.addEventListener("click", function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
-    }
-});
+        // When the user clicks anywhere outside of the modal, close it
+        }
+    });
+
+
+function modalSelect() {
+    let selectedPanel;
+
+    // Add event listeners to each colored portrait in the modal
+    document.querySelectorAll('.modalContent img').forEach(portrait => {
+        portrait.addEventListener('click', function() {
+            const newSource = portrait.src;
+
+            if (selectedPanel) {
+                const imageInPanel = selectedPanel.querySelector('img');
+                if (imageInPanel) {
+                    imageInPanel.src = newSource;
+                }
+            }
+            modal.style.display = 'none';
+        });
+    });
+
+    // Add event listener to each panel div to track the selected panel
+    document.querySelectorAll('.guessCode > div').forEach(panel => {
+        panel.addEventListener('click', function() {
+            selectedPanel = panel;
+            // Highlight the selected panel or add any other visual indication if needed
+            panel.classList.add('activeGuessBorder');
+
+            // Remove the 'activeGuessBorder' class from all other panels
+            const guessPanels = document.querySelectorAll('.guessCode > div');
+            guessPanels.forEach(guessPanel => {
+                if (guessPanel !== panel) {
+                    guessPanel.classList.remove('activeGuessBorder');
+                }
+            });
+        });
+    });
+}
+
+    
+
 
 init();
 
@@ -190,6 +225,8 @@ function init() {
     codeCheckDiv.classList.add('codeCheck');
     codeCheckDiv.innerHTML = '<h2>&#9679;&#9675;&#9675;&#9675;</h2>'
     guessCode.appendChild(codeCheckDiv);
+
+    modalSelect();
 
 }
 

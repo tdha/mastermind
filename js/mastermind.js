@@ -58,6 +58,33 @@ clearGuessButton.addEventListener('click', clearGuess);
 
 /*----- functions -----*/
 
+// guess selection modal
+// Get the modal
+const modal = document.getElementById("guessModal");
+
+// Get the button that opens the modal
+const buttonOpenModal = document.getElementById("buttonModal");
+
+// Get the <span> element that closes the modal
+const span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+buttonOpenModal.addEventListener("click", function() {
+    modal.style.display = "block";
+});
+
+// When the user clicks on <span> (x), close the modal
+span.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click", function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+});
+
 init();
 
 function init() {
@@ -114,25 +141,49 @@ function init() {
 
     // Resetting the guess area's portrait images to ANONYMOUS.
     for (let i = 0; i < 4; i++) {
-        const panelDiv = document.createElement('div');
+        const guessPanel = document.createElement('div');
             // create new dvis
-        panelDiv.classList.add('panel' + (i + 1));
+        guessPanel.classList.add('panel' + (i + 1));
             // add the classes
-        panelDiv.id = 'buttonModal'
+        guessPanel.id = 'buttonModal'
             // add the ID attribute
         const anonymousImg = document.createElement('img');
             // create img tags
         anonymousImg.src = ANONYMOUS    ;
         anonymousImg.alt = 'Illustration of a person in silhouette.';
-        panelDiv.appendChild(anonymousImg);
-        guessCode.appendChild(panelDiv);
+        guessPanel.appendChild(anonymousImg);
+        guessCode.appendChild(guessPanel);
             // insert ANONYMOUS image into each div within guessCode
     
             // attach event listener to div to open modal
-            panelDiv.addEventListener('click', function() {
+            guessPanel.addEventListener('click', function() {
                 modal.style.display = 'block';
+                guessPanel.classList.add('activeGuessBorder');
+                    // to highlight active guess
             });
     }
+
+    // When the modal closes via click(x), remove the 'activeGuessBorder' class from all panels
+    span.addEventListener("click", function() {
+        modal.style.display = "none";
+        const guessPanels = document.querySelectorAll('.guessCode > div');
+        guessPanels.forEach(panel => {
+            panel.classList.remove('activeGuessBorder'); 
+            // Remove class when modal closes
+        });
+    });
+
+    // When the modal closes via outside of modal, remove the 'activeGuessBorder' class from all panels
+    window.addEventListener("click", function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        const guessPanels = document.querySelectorAll('.guessCode > div');
+        guessPanels.forEach(panel => {
+            panel.classList.remove('activeGuessBorder'); 
+            // Remove class when modal closes
+            });
+        }
+    });
 
     // create and append the codeCheck div
     const codeCheckDiv = document.createElement('div');
@@ -167,7 +218,7 @@ function generateSecretCode() {
         secretCode.push(shuffledPeople[randomIndex]);
     }
     return secretCode;
-};
+}
 
 
 // game sequence
@@ -203,29 +254,3 @@ function clearGuess() {
 function getWinner() {
     
 }
-
-// Get the modal
-const modal = document.getElementById("guessModal");
-
-// Get the button that opens the modal
-const buttonOpenModal = document.getElementById("buttonModal");
-
-// Get the <span> element that closes the modal
-const span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-buttonOpenModal.addEventListener("click", function() {
-    modal.style.display = "block";
-  });
-
-// When the user clicks on <span> (x), close the modal
-span.addEventListener("click", function() {
-    modal.style.display = "none";
-  });
-
-// When the user clicks anywhere outside of the modal, close it
-window.addEventListener("click", function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  });

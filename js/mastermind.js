@@ -9,11 +9,12 @@ const PERSON = {
 };
 
 const MYSTERY = 'assets/mystery.png';
+const ANONYMOUS = 'assets/anonymous.png';
 
 const PEG = {
     blackPeg: '&#9679;',
         // guessColor = computerColor && guessPanel = computerPanel
-        whitePeg: '&#9675;'
+    whitePeg: '&#9675;'
         // guessColor = computerColor && guessPanel !== computerPanel
     // QUESTION: Do I need to define a null state i.e. no correct colours
 };
@@ -29,6 +30,7 @@ const newGameButton = document.getElementById('refresh');
 const clearGuessButton = document.getElementById('clear');
 const submitGuessButton = document.getElementById('submit');
 
+
 /*----- state variables -----*/
 let check;
 let turn;
@@ -38,8 +40,8 @@ let winner;
     // 'win' = guess === computerCode && turn > 0;
 let computerCode;
 let history;
-let timerInterval;
-    // variable to store the interval for the timer countdown.
+let turnInterval;
+    // variable to store the interval for the turn countdown.
 let turnCountdown = 12;
 const people = Object.keys(PERSON);
 let secretCode = generateSecretCode();
@@ -68,10 +70,15 @@ function init() {
     computerCode.innerHTML = '';
         // clear existing content in computerCode
 
+        let guessCode = document.querySelector('.guessCode')
+    guessCode.innerHTML = '';
+        // clear existing content in guessCode
+
+
     secretCode = generateSecretCode();
     console.log(secretCode);
-
         // generate new secret code
+
 
     history = '';
         // history is cleared
@@ -79,6 +86,7 @@ function init() {
         // currentGuess is empty
     check = '';
         // checkGuess is hidden; visible when turn is submitted
+
 
     // Resetting the computer code's portrait images to MYSTERY.
     for (let i = 0; i < 4; i++) {
@@ -95,12 +103,42 @@ function init() {
             // insert MYSTERY image into each div within computerCode
     }
 
-    // create and append the timer div
-    const timerDiv = document.createElement('div');
-    timerDiv.classList.add('timer');
-    timerDiv.innerHTML = '<h3>12</h3>'
+
+
+
+
+
+    // Resetting the guess area's portrait images to ANONYMOUS.
+    for (let i = 0; i < 4; i++) {
+        const panelDiv = document.createElement('div');
+            // create new dvis
+        panelDiv.classList.add('panel' + (i + 1));
+            // add the classes
+        const anonymousImg = document.createElement('img');
+            // create img tags
+        anonymousImg.src = ANONYMOUS    ;
+        anonymousImg.alt = 'Illustration of a person in silhouette.';
+        panelDiv.appendChild(anonymousImg);
+        guessCode.appendChild(panelDiv);
+            // insert ANONYMOUS image into each div within guessCode
+    }
+
+
+
+
+
+
+
+
+
+
+
+    // create and append the turn div
+    const turnDiv = document.createElement('div');
+    turnDiv.classList.add('turn');
+    turnDiv.innerHTML = '<h3>12</h3>'
         // initial countdown value
-    computerCode.appendChild(timerDiv);
+    computerCode.appendChild(turnDiv);
 }
 
 function render() {

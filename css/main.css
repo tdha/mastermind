@@ -163,19 +163,9 @@ img {
 
 .close {
   color: #aaaaaa;
-  float:right;
+  float: right;
   font-size: 28px;
   font-weight: bold;
-}
-
-#closeBar {
-  display: flex;
-  background-color: #ffffff;
-  width: 80%;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 24px 0;
-  justify-content: center;
 }
 
 .close:hover,

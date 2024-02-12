@@ -66,11 +66,11 @@ function init() {
 
     message.innerText = 'Mastermole!';
 
-    let computerCode = document.querySelector('.computerCode')
+    const computerCode = document.querySelector('.computerCode')
     computerCode.innerHTML = '';
         // clear existing content in computerCode
 
-        let guessCode = document.querySelector('.guessCode')
+    const guessCode = document.querySelector('.guessCode')
     guessCode.innerHTML = '';
         // clear existing content in guessCode
 
@@ -103,8 +103,12 @@ function init() {
             // insert MYSTERY image into each div within computerCode
     }
 
-
-
+    // create and append the turn div
+    const turnDiv = document.createElement('div');
+    turnDiv.classList.add('turn');
+    turnDiv.innerHTML = '<h3>12</h3>'
+        // initial countdown value
+    computerCode.appendChild(turnDiv);
 
 
 
@@ -114,6 +118,8 @@ function init() {
             // create new dvis
         panelDiv.classList.add('panel' + (i + 1));
             // add the classes
+        panelDiv.id = 'buttonModal'
+            // add the ID attribute
         const anonymousImg = document.createElement('img');
             // create img tags
         anonymousImg.src = ANONYMOUS    ;
@@ -121,24 +127,19 @@ function init() {
         panelDiv.appendChild(anonymousImg);
         guessCode.appendChild(panelDiv);
             // insert ANONYMOUS image into each div within guessCode
+    
+            // attach event listener to div to open modal
+            panelDiv.addEventListener('click', function() {
+                modal.style.display = 'block';
+            });
     }
 
+    // create and append the codeCheck div
+    const codeCheckDiv = document.createElement('div');
+    codeCheckDiv.classList.add('codeCheck');
+    codeCheckDiv.innerHTML = '<h2>&#9679;&#9675;&#9675;&#9675;</h2>'
+    guessCode.appendChild(codeCheckDiv);
 
-
-
-
-
-
-
-
-
-
-    // create and append the turn div
-    const turnDiv = document.createElement('div');
-    turnDiv.classList.add('turn');
-    turnDiv.innerHTML = '<h3>12</h3>'
-        // initial countdown value
-    computerCode.appendChild(turnDiv);
 }
 
 function render() {

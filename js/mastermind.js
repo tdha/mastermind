@@ -41,6 +41,8 @@ let history;
 let timerInterval;
     // variable to store the interval for the timer countdown.
 let turnCountdown = 12;
+const people = Object.keys(PERSON);
+let secretCode = generateSecretCode();
 
 /*----- cached elements  -----*/
 const message = document.querySelector('h1');
@@ -62,9 +64,14 @@ function init() {
 
     message.innerText = 'Mastermole!';
 
-    const computerCode = document.querySelector('.computerCode')
+    let computerCode = document.querySelector('.computerCode')
     computerCode.innerHTML = '';
         // clear existing content in computerCode
+
+    secretCode = generateSecretCode();
+    console.log(secretCode);
+
+        // generate new secret code
 
     history = '';
         // history is cleared
@@ -99,6 +106,25 @@ function init() {
 function render() {
     // QUESTION: what needs to go here?
 }
+
+// generate a secret code from shuffling PEOPLE
+    // found: Fisher-Yates shuffle algorithm (Knuth shuffle)
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+    // generating secret code
+function generateSecretCode() {
+    const shuffledPeople = shuffle(people);
+        // shuffle PEOPLE array
+    const secretCode = shuffledPeople.slice(0, 4);
+        // select the first four poeple from the shuffle array
+    return secretCode;
+};
+
 
 // game sequence
     // make a currentGuess by selecting four people (popup per person)

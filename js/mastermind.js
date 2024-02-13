@@ -86,20 +86,15 @@ function modalSelect() {
     let selectedPanel;
 
     // Add event listeners to each colored portrait in the modal
-    document.querySelectorAll('.modalContent img').forEach(portrait => {
+    document.querySelectorAll('.modalContent > div').forEach(portrait => {
         portrait.addEventListener('click', function() {
-    
-        const newSource = portrait.src;
-   
-            if (selectedPanel) {
-                const imageInPanel = selectedPanel.querySelector('img');
-                if (imageInPanel) {
-                imageInPanel.src = newSource;
-                   }
-               }
-                modal.style.display = 'none';
-           });
-       });
+            const newId = portrait.id;
+                if (selectedPanel) {
+                    selectedPanel.id = newId;
+                    }
+                    modal.style.display = 'none';
+                });
+            });
 
     // Add event listener to each panel div to track the selected panel
     document.querySelectorAll('.guessCode > div').forEach(panel => {
@@ -121,22 +116,16 @@ function modalSelect() {
 
 
 function clearGuess() {
-    // console.log('clear button clicked');
-    // select all guess panels
-    const guessPanel = document.querySelectorAll('.guessCode > div');
-    // loop through each paneland set the image source back to ANONYMOUS
-    guessPanel.forEach(panel => {
+    const guessPanels = document.querySelectorAll('.guessCode > div');
+    guessPanels.forEach(panel => {
         const panelImg = panel.querySelector('img');
         if (panelImg) {
             panelImg.src = ANONYMOUS;
         }
-    });
-    // remove activeGuessBorder class
-    guessPanel.forEach(panel => {
+        panel.removeAttribute('id');
         panel.classList.remove('activeGuessBorder');
     });
 }
-
     
 
 
@@ -290,27 +279,11 @@ function generateSecretCode() {
 function getGuessValues() {
     const guessPanels = document.querySelectorAll('.guessCode > div');
     const guessValues = [];
-    for (let panel of guessPanels) {
-        const panelImg = panel.querySelector('img');
-        if (panelImg) {
-            guessValues.push(panelImg.getAttribute('src'));
-        }
+    // Iterate over the first four panels
+    for (let i = 0; i < 4; i++) {
+        guessValues.push(guessPanels[i].id);
     }
     return guessValues;
-}
-
-// attempting to map arrays. Is this needed if I can pass values from the modal selection?
-function getGuessKeys() {
-    const guessValues = getGuessValues();
-    const guessKeys = guessValues.map(value => {
-        for (const key in PERSON) {
-            if (PERSON[key] === value) {
-                return key;
-            }
-        }
-        return null;
-    });
-    return guessKeys;
 }
 
 

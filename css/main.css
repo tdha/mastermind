@@ -205,6 +205,26 @@ img {
   width: 100%;
 }
 
+#purple {
+  content: url(/assets/purple.png);
+  width: 100%;
+}
+
+#red {
+  content: url(/assets/red.png);
+  width: 100%;
+}
+
+#yellow {
+  content: url(/assets/yellow.png);
+  width: 100%;
+}
+
+#anonymous {
+  content: url(/assets/anonymous.png);
+  width: 100%;
+}
+
 @media screen and (max-width: 992px) {
   body {
     max-width: 992px;

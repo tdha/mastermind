@@ -190,37 +190,37 @@ img {
   cursor: pointer;
 }
 
-#green {
+.green {
   content: url(/assets/green.gif);
   width: 100%;
 }
 
-#blue {
+.blue {
   content: url(/assets/blue.png);
   width: 100%;
 }
 
-#orange {
+.orange {
   content: url(/assets/orange.png);
   width: 100%;
 }
 
-#purple {
+.purple {
   content: url(/assets/purple.png);
   width: 100%;
 }
 
-#red {
+.red {
   content: url(/assets/red.png);
   width: 100%;
 }
 
-#yellow {
+.yellow {
   content: url(/assets/yellow.png);
   width: 100%;
 }
 
-#anonymous {
+.anonymous {
   content: url(/assets/anonymous.png);
   width: 100%;
 }

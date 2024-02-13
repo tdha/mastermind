@@ -88,9 +88,9 @@ function modalSelect() {
     // Add event listeners to each colored portrait in the modal
     document.querySelectorAll('.modalContent > div').forEach(portrait => {
         portrait.addEventListener('click', function() {
-            const newId = portrait.id;
+            const newClass = portrait.className;
                 if (selectedPanel) {
-                    selectedPanel.id = newId;
+                    selectedPanel.className = newClass;
                     }
                     modal.style.display = 'none';
                 });
@@ -122,7 +122,11 @@ function clearGuess() {
         if (panelImg) {
             panelImg.src = ANONYMOUS;
         }
-        panel.removeAttribute('id');
+        const isCodeCheck  = panel.classList.contains('codeCheck');
+        panel.removeAttribute('class');
+        if (isCodeCheck) {
+            panel.classList.add('codeCheck');
+        }
         panel.classList.remove('activeGuessBorder');
     });
 }

@@ -19,13 +19,6 @@ const PEG = {
     // QUESTION: Do I need to define a null state i.e. no correct colours
 };
 
-// const GUESS = {
-//     guessComponentOne: document.getElementsByClassName('panelOne'),
-//     guessComponentTwo: document.getElementsByClassName('panelTwo'),
-//     guessComponentThree: document.getElementsByClassName('panelThree'),
-//     guessComponentFour: document.getElementsByClassName('panelFour'),
-// };
-
 const newGameButton = document.getElementById('refresh');
 const submitGuessButton = document.getElementById('submit');
 const clearGuessButton = document.getElementById('clear');
@@ -94,11 +87,32 @@ function modalSelect() {
             }
             modal.style.display = 'none';
 
+            // // Check if the guess is valid after every click on the modal
+            // const isValid = validateGuess();
+            // console.log('Is Guess Valid:', isValid);
+
+            // const guessValues = getGuessValues();
+
+            // // Change the submit button image based on validateGuess
+            // if (isValid) {
+            //     submitGuessButton.src = 'icon-check-48-blue.png';
+            // } else {
+            //     submitGuessButton.src = 'icon-check-48-grey.png';
+            // }
+            // Get the guess values
+            const guessValues = getGuessValues();
+
             // Check if the guess is valid after every click on the modal
-            const isValid = validateGuess();
+            const isValid = validateGuess(guessValues);
             console.log('Is Guess Valid:', isValid);
 
-            const guessValues = getGuessValues();
+            // Change the submit button image based on validateGuess
+            if (isValid) {
+                submitGuessButton.src = 'icon-check-48-blue.png';
+            } else {
+                submitGuessButton.src = 'icon-check-48-grey.png';
+            }
+
         });
     });
 
@@ -304,6 +318,13 @@ function getGuessValues() {
     return guessValues;
 }
 
+function validateGuess(guessValues) {
+    if (guessValues.includes('anonymous')) {
+        return false;
+    }
+    return true;
+}
+
 function validateGuess() {
     const guessValues = getGuessValues();
     const keys = Object.keys(PERSON);
@@ -318,7 +339,6 @@ function validateGuess() {
     // All values in guessValues are keys in PERSON
     return true;
 }
-
 
 console.log(validateGuess(PERSON));
 

@@ -187,7 +187,7 @@ function init() {
     // create and append the turn div
     const turnDiv = document.createElement('div');
     turnDiv.classList.add('turn');
-    turnDiv.innerHTML = '<h3>12</h3>'
+    turnDiv.innerHTML = `<h3>${turnCountdown}</h3>`
         // initial countdown value
     computerCode.appendChild(turnDiv);
 
@@ -284,12 +284,6 @@ function generateSecretCode() {
     // guess now shows in history (scrollable)
     // guess in history shows checkGuess (black peg, white peg, null)
     // turn -1
-function makeGuess() {
-    // click square in currentGuess
-        // currentGuess.getElementByClass('currentTurn > guessCode > panelOne')
-    // select PERSON from popup (TODO)
-    // selection = panelOne
-}
 
 function submitGuess() {
     // if all panels(4) have selections

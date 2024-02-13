@@ -1,4 +1,4 @@
-/*----- constants -----*/
+/*----- CONSTANTS -----*/
 const PERSON = {
     green: 'assets/green.gif', 
     red: 'assets/red.png',
@@ -27,11 +27,12 @@ const GUESS = {
 };
 
 const newGameButton = document.getElementById('refresh');
-const clearGuessButton = document.getElementById('clear');
 const submitGuessButton = document.getElementById('submit');
+const clearGuessButton = document.getElementById('clear');
 
 
-/*----- state variables -----*/
+
+/*----- STATE VARIABLES -----*/
 let check;
 let turn;
 let winner; 
@@ -46,17 +47,17 @@ let turnCountdown = 12;
 const people = Object.keys(PERSON);
 let secretCode = generateSecretCode();
 
-/*----- cached elements  -----*/
+/*----- CACHED ELEMENTS  -----*/
 const message = document.querySelector('h1');
 
 
-/*----- event listeners -----*/
+/*----- EVENT LISTENERS -----*/
 newGameButton.addEventListener('click', init);
 submitGuessButton.addEventListener('click', submitGuess);
 clearGuessButton.addEventListener('click', clearGuess);
 
 
-/*----- functions -----*/
+/*----- FUNCTIONS -----*/
 
 // guess selection modal
 const modal = document.getElementById("guessModal");
@@ -107,13 +108,31 @@ function modalSelect() {
             panel.classList.add('activeGuessBorder');
 
             // Remove the 'activeGuessBorder' class from all other panels
-            const guessPanels = document.querySelectorAll('.guessCode > div');
+            const guessPanels = document.querySelectorAll('.guessCode > div > div');
             guessPanels.forEach(guessPanel => {
                 if (guessPanel !== panel) {
                     guessPanel.classList.remove('activeGuessBorder');
                 }
             });
         });
+    });
+}
+
+
+function clearGuess() {
+    // console.log('clear button clicked');
+    // select all guess panels
+    const guessPanel = document.querySelectorAll('.guessCode > div');
+    // loop through each paneland set the image source back to ANONYMOUS
+    guessPanel.forEach(panel => {
+        const panelImg = panel.querySelector('img');
+        if (panelImg) {
+            panelImg.src = ANONYMOUS;
+        }
+    });
+    // remove activeGuessBorder class
+    guessPanel.forEach(panel => {
+        panel.classList.remove('activeGuessBorder');
     });
 }
 
@@ -281,10 +300,6 @@ function submitGuess() {
 }
 
 function checkGuess() {
-
-}
-
-function clearGuess() {
 
 }
 

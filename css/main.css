@@ -190,6 +190,21 @@ img {
   cursor: pointer;
 }
 
+#green {
+  content: url(/assets/green.gif);
+  width: 100%;
+}
+
+#blue {
+  content: url(/assets/blue.png);
+  width: 100%;
+}
+
+#orange {
+  content: url(/assets/orange.png);
+  width: 100%;
+}
+
 @media screen and (max-width: 992px) {
   body {
     max-width: 992px;

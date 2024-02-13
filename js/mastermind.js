@@ -19,12 +19,12 @@ const PEG = {
     // QUESTION: Do I need to define a null state i.e. no correct colours
 };
 
-const GUESS = {
-    guessComponentOne: document.getElementsByClassName('panelOne'),
-    guessComponentTwo: document.getElementsByClassName('panelTwo'),
-    guessComponentThree: document.getElementsByClassName('panelThree'),
-    guessComponentFour: document.getElementsByClassName('panelFour'),
-};
+// const GUESS = {
+//     guessComponentOne: document.getElementsByClassName('panelOne'),
+//     guessComponentTwo: document.getElementsByClassName('panelTwo'),
+//     guessComponentThree: document.getElementsByClassName('panelThree'),
+//     guessComponentFour: document.getElementsByClassName('panelFour'),
+// };
 
 const newGameButton = document.getElementById('refresh');
 const submitGuessButton = document.getElementById('submit');
@@ -88,17 +88,18 @@ function modalSelect() {
     // Add event listeners to each colored portrait in the modal
     document.querySelectorAll('.modalContent img').forEach(portrait => {
         portrait.addEventListener('click', function() {
-            const newSource = portrait.src;
-
+    
+        const newSource = portrait.src;
+   
             if (selectedPanel) {
                 const imageInPanel = selectedPanel.querySelector('img');
                 if (imageInPanel) {
-                    imageInPanel.src = newSource;
-                }
-            }
-            modal.style.display = 'none';
-        });
-    });
+                imageInPanel.src = newSource;
+                   }
+               }
+                modal.style.display = 'none';
+           });
+       });
 
     // Add event listener to each panel div to track the selected panel
     document.querySelectorAll('.guessCode > div').forEach(panel => {
@@ -273,7 +274,7 @@ function generateSecretCode() {
             // selects a random value with each iteration
         secretCode.push(shuffledPeople[randomIndex]);
     }
-    return secretCode;
+    return secretCode; 
 }
 
 
@@ -284,6 +285,34 @@ function generateSecretCode() {
     // guess now shows in history (scrollable)
     // guess in history shows checkGuess (black peg, white peg, null)
     // turn -1
+
+
+function getGuessValues() {
+    const guessPanels = document.querySelectorAll('.guessCode > div');
+    const guessValues = [];
+    for (let panel of guessPanels) {
+        const panelImg = panel.querySelector('img');
+        if (panelImg) {
+            guessValues.push(panelImg.getAttribute('src'));
+        }
+    }
+    return guessValues;
+}
+
+// attempting to map arrays. Is this needed if I can pass values from the modal selection?
+function getGuessKeys() {
+    const guessValues = getGuessValues();
+    const guessKeys = guessValues.map(value => {
+        for (const key in PERSON) {
+            if (PERSON[key] === value) {
+                return key;
+            }
+        }
+        return null;
+    });
+    return guessKeys;
+}
+
 
 function submitGuess() {
     // if all panels(4) have selections

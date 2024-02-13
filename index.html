@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Spicy+Rice&display=swap" rel="stylesheet">
     <script defer src="js/mastermind.js"></script>
+    <link rel="icon" href="data:,">
     <title>Mastermole!</title>
 </head>
 <body>
@@ -29,13 +30,20 @@
    
     <div id="guessModal" class="modal">
         <div class="modalContent">
-            <div><img src="assets/green.gif" alt="Illustration of a woman with a hat on a green background."></div>
-            <div><img src="assets/blue.png" alt="Illustration of a man with glasses on a blue background."></div>
-            <div><img src="assets/orange.png" alt="Illustration of a woan with a beanie on an orange background."></div>
-            <div><img src="assets/purple.png" alt="Illustration of a lady with a polkdot dress on a purple background."></div>
-            <div><img src="assets/red.png" alt="Illustration of a bald man in a singlet on a red background."></div>
-            <div><img src="assets/yellow.png" alt="Illustration of a lady with a dotty dress on a yellow background."></div>
-            <div><img src="assets/anonymous.png" alt="Illustration of a person in silhouette with question mark."></div>
+            <div id="green"></div>
+            <!-- <div><img src="assets/green.gif" alt="Illustration of a woman with a hat on a green background."></div> -->
+            <div id="blue"></div>
+            <!-- <div><img src="assets/blue.png" alt="Illustration of a man with glasses on a blue background."></div> -->
+            <div id="orange"></div>
+            <!-- <div><img src="assets/orange.png" alt="Illustration of a woan with a beanie on an orange background."></div> -->
+            <div id="purple"></div>
+            <!-- <div><img src="assets/purple.png" alt="Illustration of a lady with a polkdot dress on a purple background."></div> -->
+            <div id="red"></div>
+            <!-- <div><img src="assets/red.png" alt="Illustration of a bald man in a singlet on a red background."></div> -->
+            <div id="yellow"></div>
+            <!-- <div><img src="assets/yellow.png" alt="Illustration of a lady with a dotty dress on a yellow background."></div> -->
+            <div id="anonymous"></div>
+            <!-- <div><img src="assets/anonymous.png" alt="Illustration of a person in silhouette with question mark."></div> -->
             <div></div>
             <div></div>
             <!-- <div><span class="close"><img class="icon" id="clear" src="assets/icon-cancel-48.svg" alt="Icon for cancelling guesses."></span></div> -->
@@ -54,7 +62,7 @@
             <div id="actions">
                 <button id="refresh" ><img class="icon" src="assets/icon-refresh-48.svg" alt="Icon for starting a new game."></button>
                 <button id="clear" ><img class="icon" src="assets/icon-cancel-48.svg" alt="Icon for resetting guesses."></button>
-                <button id="submit" ><img class="icon" src="assets/icon-check-48.svg" alt="Icon for submitting guesses."></button>
+                <button id="submit" ><img class="icon" src="assets/icon-check-48-grey.png" alt="Icon for submitting guesses."></button>
             </div>
         </section>
     </section>

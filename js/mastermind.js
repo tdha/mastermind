@@ -87,24 +87,13 @@ function modalSelect() {
             }
             modal.style.display = 'none';
 
-            // // Check if the guess is valid after every click on the modal
-            // const isValid = validateGuess();
-            // console.log('Is Guess Valid:', isValid);
-
-            // const guessValues = getGuessValues();
-
-            // // Change the submit button image based on validateGuess
-            // if (isValid) {
-            //     submitGuessButton.src = 'icon-check-48-blue.png';
-            // } else {
-            //     submitGuessButton.src = 'icon-check-48-grey.png';
-            // }
             // Get the guess values
             const guessValues = getGuessValues();
 
             // Check if the guess is valid after every click on the modal
             const isValid = validateGuess(guessValues);
-            console.log('Is Guess Valid:', isValid);
+
+            console.log('IsValid:', isValid);
 
             // Change the submit button image based on validateGuess
             if (isValid) {
@@ -137,19 +126,22 @@ function modalSelect() {
 
 function clearGuess() {
     const guessPanels = document.querySelectorAll('.guessCode > div');
-    guessPanels.forEach(panel => {
-        const panelImg = panel.querySelector('img');
-        if (panelImg) {
-            panelImg.src = ANONYMOUS;
+    guessPanels.forEach((panel, index) => {
+        if (index < 4) {
+            panel.classList.remove('activeGuessBorder');
+            panel.classList.remove('codeCheck');
+            panel.classList.add('anonymous');
         }
-        const isCodeCheck  = panel.classList.contains('codeCheck');
-        panel.removeAttribute('class');
-        if (isCodeCheck) {
-            panel.classList.add('codeCheck');
-        }
-        panel.classList.remove('activeGuessBorder');
     });
+
+    // Get the guess values after clearing and resetting the panels
+    const guessValues = getGuessValues();
+
+    // Check if the guess is valid after every click on the modal
+    const isValid = validateGuess(guessValues);
+    console.log('Cleared! Is Guess Valid:', isValid);
 }
+
     
 
 

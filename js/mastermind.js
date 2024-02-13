@@ -31,7 +31,6 @@ const submitGuessButton = document.getElementById('submit');
 const clearGuessButton = document.getElementById('clear');
 
 
-
 /*----- STATE VARIABLES -----*/
 let check;
 let turn;
@@ -81,6 +80,7 @@ window.addEventListener("click", function(event) {
         }
     });
 
+  
 
 function modalSelect() {
     let selectedPanel;
@@ -89,12 +89,18 @@ function modalSelect() {
     document.querySelectorAll('.modalContent > div').forEach(portrait => {
         portrait.addEventListener('click', function() {
             const newClass = portrait.className;
-                if (selectedPanel) {
-                    selectedPanel.className = newClass;
-                    }
-                    modal.style.display = 'none';
-                });
-            });
+            if (selectedPanel) {
+                selectedPanel.className = newClass;
+            }
+            modal.style.display = 'none';
+
+            // Check if the guess is valid after every click on the modal
+            const isValid = validateGuess();
+            console.log('Is Guess Valid:', isValid);
+
+            const guessValues = getGuessValues();
+        });
+    });
 
     // Add event listener to each panel div to track the selected panel
     document.querySelectorAll('.guessCode > div').forEach(panel => {
@@ -151,7 +157,7 @@ function init() {
 
 
     secretCode = generateSecretCode();
-    console.log(secretCode);
+    console.log("Secret code log ", secretCode);
         // generate new secret code
 
 
@@ -167,7 +173,7 @@ function init() {
     for (let i = 0; i < 4; i++) {
         const panelDiv = document.createElement('div');
             // create new dvis
-        panelDiv.classList.add('panel' + (i + 1));
+        // panelDiv.classList.add('panel' + (i + 1));
             // add the classes
         const mysteryImg = document.createElement('img');
             // create img tags
@@ -191,7 +197,8 @@ function init() {
     for (let i = 0; i < 4; i++) {
         const guessPanel = document.createElement('div');
             // create new dvis
-        guessPanel.classList.add('panel' + (i + 1));
+        // guessPanel.classList.add('panel' + (i + 1));
+        guessPanel.classList.add('anonymous');
             // add the classes
         guessPanel.id = 'buttonModal'
             // add the ID attribute
@@ -285,10 +292,35 @@ function getGuessValues() {
     const guessValues = [];
     // Iterate over the first four panels
     for (let i = 0; i < 4; i++) {
-        guessValues.push(guessPanels[i].id);
+        // OLD: guessValues.push(guessPanels[i].classList[0]);
+        // extract the colour value form the class list
+        const classList = guessPanels[i].classList;
+        for (let className of classList) {
+            if (className !== 'activeGuessBorder' && className !== 'codeCheck') {
+                guessValues.push(className);
+            }
+        }
     }
     return guessValues;
 }
+
+function validateGuess() {
+    const guessValues = getGuessValues();
+    const keys = Object.keys(PERSON);
+
+    // Check if all values in guessValues appear as keys in PERSON
+    for (let colorValue of guessValues) {
+        if (!keys.includes(colorValue)) {
+            return false;
+        }
+    }
+
+    // All values in guessValues are keys in PERSON
+    return true;
+}
+
+
+console.log(validateGuess(PERSON));
 
 
 function submitGuess() {
@@ -299,10 +331,12 @@ function submitGuess() {
         // checkGuess()
 }
 
-function checkGuess() {
 
+function checkGuess() {
+    
 }
 
 function getWinner() {
     
 }
+

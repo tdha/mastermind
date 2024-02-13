@@ -11,6 +11,7 @@ body {
   margin: auto;
   display: flex;
   flex-direction: column;
+  /* align-items:flex-end; */
   justify-content: space-between;
   background-image: url("../assets/pattern-circles-crosses.png");
   background-repeat: repeat repeat;
@@ -21,11 +22,20 @@ body {
 header {
   padding: 36px 12px 12px 12px;
   padding-top: 36px;
-  background-color:rgba(176, 190, 197, 0.7);
+  background-color:rgba(176, 190, 197, 0.96);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: left;
+}
+
+#topFix {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  margin: 0 auto;
 }
 
 h1 {
@@ -84,13 +94,15 @@ img {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* align-items: flex-end; */
+  justify-content: flex-end;
 }
 
 #history > div {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 2px;
+  margin: 0 0 8px 0;
 }
 
 #guess {
@@ -100,6 +112,15 @@ img {
   flex-direction: column;
   align-items: center;
   text-align: left;
+}
+
+.bottom {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  margin: 0 auto;
 }
 
 .currentTurn {
@@ -146,7 +167,7 @@ img {
 #guessModal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 1000; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;

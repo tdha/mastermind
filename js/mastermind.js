@@ -29,8 +29,8 @@ const clearGuessButton = document.getElementById('clear');
 
 
 /*----- STATE VARIABLES -----*/
-let check;
-let turn;
+// let check;
+let turnCount = 0;
 let winner; 
     // null = no winner; 
     // 'lose' = guess !== computerCode && turn === '0'; 
@@ -42,6 +42,7 @@ let turnInterval;
 let turnCountdown = 12;
 const people = Object.keys(PERSON);
 let secretCode = generateSecretCode();
+let historySection = document.getElementById('history');
 
 /*----- CACHED ELEMENTS  -----*/
 const message = document.querySelector('h1');
@@ -100,13 +101,13 @@ function modalSelect() {
             console.log('IsValid:', isValid);
 
             // Change the submit button image based on validateGuess
-            if (isValid) {
-                submitGuessButton.src = 'icon-check-48-blue.png';
-                submitGuessButton.disabled = false; // Enable the button
-            } else {
-                submitGuessButton.src = 'icon-check-48-grey.png';
-                submitGuessButton.disabled = true; // Disable the button
-            }
+            // if (isValid) {
+            //     submitGuessButton.src = 'icon-check-48-blue.png';
+            //     submitGuessButton.disabled = false; // Enable the button
+            // } else {
+            //     submitGuessButton.src = 'icon-check-48-grey.png';
+            //     submitGuessButton.disabled = true; // Disable the button
+            // }
 
         });
     });
@@ -130,8 +131,28 @@ function modalSelect() {
 }
 
 
+// function clearGuess() {
+//     const guessPanels = document.querySelectorAll('.guessCode > div');
+//     guessPanels.forEach((panel, index) => {
+//         if (index < 4) {
+//             panel.classList.remove('activeGuessBorder');
+//             panel.classList.remove('codeCheck');
+//             panel.classList.add('anonymous');
+//         }
+//     });
+
+//     // Get the guess values after clearing and resetting the panels
+//     const guessValues = getGuessValues();
+
+//     // Check if the guess is valid after every click on the modal
+//     const isValid = validateGuess(guessValues);
+//     console.log('Cleared! Is Guess Valid:', isValid);
+// }
+
 function clearGuess() {
-    const guessPanels = document.querySelectorAll('.guessCode > div');
+    const guessCode = document.querySelector('.guessCode');
+    const guessPanels = guessCode.querySelectorAll('div');
+
     guessPanels.forEach((panel, index) => {
         if (index < 4) {
             panel.classList.remove('activeGuessBorder');
@@ -147,7 +168,6 @@ function clearGuess() {
     const isValid = validateGuess(guessValues);
     console.log('Cleared! Is Guess Valid:', isValid);
 }
-
     
 
 
@@ -179,6 +199,9 @@ function init() {
         // currentGuess is empty
     check = '';
         // checkGuess is hidden; visible when turn is submitted
+    turnCount = 0;
+    turnCountdown = 12;
+    historySection.innerHTML = '';
 
 
     // Resetting the computer code's portrait images to MYSTERY.
@@ -316,12 +339,27 @@ function getGuessValues() {
     return guessValues;
 }
 
-function validateGuess(guessValues) {
-    if (guessValues.includes('anonymous')) {
-        return false;
-    }
-    return true;
-}
+// function validateGuess(guessValues) {
+//     if (guessValues.includes('anonymous')) {
+//         return false;
+//     }
+//     return true;
+// }
+
+// function validateGuess() {
+//     const guessValues = getGuessValues();
+//     const keys = Object.keys(PERSON);
+
+//     // Check if all values in guessValues appear as keys in PERSON
+//     for (let colorValue of guessValues) {
+//         if (!keys.includes(colorValue)) {
+//             return false;
+//         }
+//     }
+
+//     // All values in guessValues are keys in PERSON
+//     return true;
+// }
 
 function validateGuess() {
     const guessValues = getGuessValues();
@@ -339,15 +377,52 @@ function validateGuess() {
 }
 
 
+
 console.log(validateGuess(PERSON));
 
 
 function submitGuess() {
-    // if all panels(4) have selections
-    // click
-        // clears currentGuess
-        // adds guess to history
-        // checkGuess()
+    // check guess is filled with four suspects
+    const guessValues = getGuessValues();
+    if (guessValues.length !== 4) {
+        // TODO add audio error
+        console.log('Pick four suspects.');
+        return; 
+    }
+
+    // check guess is valid
+    const isValidGuess = validateGuess(guessValues);
+    if (!isValidGuess) {
+        console.log('Invalid guess. Please select valid suspects.');
+        return;
+    }
+
+    // increment turnCount
+    turnCount++;
+
+    // decrement turnCountdown by turnCount
+    turnCountdown --;
+
+    // upddate turnCountdown display
+    const turnDiv = document.querySelector('.turn > h3');
+    turnDiv.textContent = turnCountdown;
+
+    // copy guess
+    const guessCode = document.querySelector('.guessCode');
+    const guessCodeCopy = guessCode.cloneNode(true);
+
+    // change class of cloned guessCode div to reflect turn number
+    const turnNumber = document.querySelectorAll('.turn').length + 1;
+    guessCodeCopy.classList.remove('guessCode');
+    guessCodeCopy.classList.add(`turn${turnCount}`);
+
+    // append clone to history secton
+    // const historySection = document.getElementById('history');
+    historySection.appendChild(guessCodeCopy);
+
+    // clear the guessCode div
+    clearGuess();
+
 }
 
 

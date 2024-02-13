@@ -1,3 +1,6 @@
+/*----- TODOs -----*/
+    // 
+
 /*----- CONSTANTS -----*/
 const PERSON = {
     green: 'assets/green.gif', 
@@ -20,6 +23,7 @@ const PEG = {
 };
 
 const newGameButton = document.getElementById('refresh');
+// const submitGuessButton = document.querySelector('.submit');
 const submitGuessButton = document.getElementById('submit');
 const clearGuessButton = document.getElementById('clear');
 
@@ -98,8 +102,10 @@ function modalSelect() {
             // Change the submit button image based on validateGuess
             if (isValid) {
                 submitGuessButton.src = 'icon-check-48-blue.png';
+                submitGuessButton.disabled = false; // Enable the button
             } else {
                 submitGuessButton.src = 'icon-check-48-grey.png';
+                submitGuessButton.disabled = true; // Disable the button
             }
 
         });
@@ -210,7 +216,7 @@ function init() {
             // add the ID attribute
         const anonymousImg = document.createElement('img');
             // create img tags
-        anonymousImg.src = ANONYMOUS    ;
+        anonymousImg.src = ANONYMOUS;
         anonymousImg.alt = 'Illustration of a person in silhouette.';
         guessPanel.appendChild(anonymousImg);
         guessCode.appendChild(guessPanel);
@@ -331,6 +337,7 @@ function validateGuess() {
     // All values in guessValues are keys in PERSON
     return true;
 }
+
 
 console.log(validateGuess(PERSON));
 

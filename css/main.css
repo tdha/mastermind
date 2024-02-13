@@ -225,6 +225,10 @@ img {
   width: 100%;
 }
 
+/* .submit {
+  content: url(/assets/icon-check-48-grey.png);
+} */
+
 @media screen and (max-width: 992px) {
   body {
     max-width: 992px;

@@ -88,14 +88,23 @@ img {
   transition: transform 150ms ease-in;
 }
 
-#history {
-  padding: 0 12px;
-  max-width: 1000px;
-  margin: 0 auto;
+.container {
+  position: fixed;
+  top: 330px;
+  bottom: 312px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  /* align-items: flex-end; */
-  justify-content: flex-end;
+  flex-direction: column-reverse;
+  /* margin-top: 300px; */
+  max-height: 100vh; /* Adjust as needed */
+  overflow-y: auto;
+}
+
+#history {
+  /* padding: 0 12px; */
+  max-width: 1000px;
+  flex-grow: 1;
+  margin: 0 auto;
 }
 
 #history > div {
@@ -272,6 +281,23 @@ img {
     h3 {
       font-size: 76px;
   }
+  header {
+    height: 306px;
+  }
+  .container {
+    padding: 0 12px;
+    top: 306px;
+    bottom: 306px;
+    max-height: 100vh;
+    width: 100%;
+  }
+  #history {
+    max-width: 992px;
+    margin: 0 auto;
+  }
+  #guess {
+    height: 306px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -284,6 +310,23 @@ img {
   }
   h3 {
     font-size: 60px;
+  }
+  header {
+    height: 262px;
+  }
+  .container {
+    padding: 0 12px;
+    top: 262px;
+    bottom: 262px;
+    max-height: 100vh;
+    width: 100%;
+  }
+  #history {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+  #guess {
+    height: 262px;
   }
 }
 
@@ -298,4 +341,51 @@ img {
   h3 {
     font-size: 48px;
   }
+  header {
+    height: 223px;
+  }
+  .container {
+    padding: 0 12px;
+    top: 223px;
+    bottom: 223px;
+    max-height: 100vh;
+    width: 100%;
+  }
+  #history {
+    max-width: 575px;
+    margin: 0 auto;
+  }
+  #guess {
+    height: 223px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  body {
+      max-width: 376px;
+      background-size: 75%;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 44px;
+    header {
+      height: 183px;
+    }
+    .container {
+      padding: 0 12px;
+      top: 183px;
+      bottom: 183px;
+      max-height: 100vh;
+      width: 100%;
+    }
+    #history {
+      max-width: 376px;
+      margin: 0 auto;
+    }
+    #guess {
+      height: 183px;
+    }
+}
 }

@@ -47,6 +47,7 @@ h1 {
 
 h2 {
   font-size: 48px;
+  /* line-height: 0px; */
 }
 
 h3 {
@@ -143,8 +144,15 @@ img {
 }
 
 .codeCheck {
-  display: grid;
-  place-items: center;
+
+  display: inline-block;
+  align-self: center;
+  justify-self: center;
+}
+
+.peg {
+  font-size: 48px;
+  float: left;
 }
 
 .codeCheckFill {
@@ -305,7 +313,7 @@ img {
     max-width: 768px;
     background-size: 60%;
   }
-  h2 {
+  .peg {
     font-size: 36px;
   }
   h3 {
@@ -335,7 +343,7 @@ img {
       max-width: 575px;
       background-size: 75%;
   }
-  h2 {
+  .peg {
     font-size: 28px;
   }
   h3 {
@@ -365,7 +373,7 @@ img {
       max-width: 376px;
       background-size: 75%;
   }
-  h2 {
+  .peg {
     font-size: 24px;
   }
   h3 {

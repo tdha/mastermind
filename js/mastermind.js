@@ -25,6 +25,7 @@ const PEG = {
 const newGameButton = document.getElementById('refresh');
 // const submitGuessButton = document.querySelector('.submit');
 const submitGuessButton = document.getElementById('submit');
+const submitGuessButtonImg = document.getElementById('submitIcon');
 const clearGuessButton = document.getElementById('clear');
 
 
@@ -101,13 +102,16 @@ function modalSelect() {
             console.log('IsValid:', isValid);
 
             // Change the submit button image based on validateGuess
-            // if (isValid) {
-            //     submitGuessButton.src = 'icon-check-48-blue.png';
-            //     submitGuessButton.disabled = false; // Enable the button
-            // } else {
-            //     submitGuessButton.src = 'icon-check-48-grey.png';
-            //     submitGuessButton.disabled = true; // Disable the button
-            // }
+            if (isValid) {
+                console.log(message);
+                // submitGuessButtonImg.style.backgroundColor = 'lightgreen';
+                submitGuessButtonImg.disabled = false; // Enable the button
+                submitGuessButtonImg.src = 'assets/icon-check-48-blue.png';
+            } else {
+                submitGuessButtonImg.src = 'assets/icon-check-48-grey.png';
+                // submitGuessButtonImg.style.backgroundColor = none;
+                submitGuessButtonImg.disabled = true; // Disable the button
+            }
 
         });
     });
@@ -152,7 +156,7 @@ function modalSelect() {
 function clearGuess() {
     const guessCode = document.querySelector('.guessCode');
     const guessPanels = guessCode.querySelectorAll('div');
-
+    
     guessPanels.forEach((panel, index) => {
         if (index < 4) {
             panel.classList.remove('activeGuessBorder');
@@ -160,6 +164,10 @@ function clearGuess() {
             panel.classList.add('anonymous');
         }
     });
+
+    // set img src of submit button to grey
+    const submitGuessButtonImg = document.querySelector('#submitIcon');
+    submitGuessButtonImg.src = 'assets/icon-check-48-grey.png';
 
     // Get the guess values after clearing and resetting the panels
     const guessValues = getGuessValues();
@@ -202,6 +210,7 @@ function init() {
     turnCount = 0;
     turnCountdown = 12;
     historySection.innerHTML = '';
+    submitGuessButtonImg.src = 'assets/icon-check-48-grey.png';
 
 
     // Resetting the computer code's portrait images to MYSTERY.
@@ -278,10 +287,11 @@ function init() {
     // create and append the codeCheck div
     const codeCheckDiv = document.createElement('div');
     codeCheckDiv.classList.add('codeCheck');
-    codeCheckDiv.innerHTML = '<h2>&#9679;&#9675;&#9675;&#9675;</h2>'
+    // codeCheckDiv.innerHTML = '<h2>&#9679;&#9675;&#9675;&#9675;</h2>'
     guessCode.appendChild(codeCheckDiv);
 
     modalSelect();
+    generatePegs();
 
 }
 
@@ -339,27 +349,6 @@ function getGuessValues() {
     return guessValues;
 }
 
-// function validateGuess(guessValues) {
-//     if (guessValues.includes('anonymous')) {
-//         return false;
-//     }
-//     return true;
-// }
-
-// function validateGuess() {
-//     const guessValues = getGuessValues();
-//     const keys = Object.keys(PERSON);
-
-//     // Check if all values in guessValues appear as keys in PERSON
-//     for (let colorValue of guessValues) {
-//         if (!keys.includes(colorValue)) {
-//             return false;
-//         }
-//     }
-
-//     // All values in guessValues are keys in PERSON
-//     return true;
-// }
 
 function validateGuess() {
     const guessValues = getGuessValues();
@@ -375,8 +364,6 @@ function validateGuess() {
     // All values in guessValues are keys in PERSON
     return true;
 }
-
-
 
 console.log(validateGuess(PERSON));
 
@@ -424,6 +411,21 @@ function submitGuess() {
     clearGuess();
 
 }
+
+function generatePegs() {
+    const codeCheckDiv = document.querySelector('.codeCheck');
+    // clear existing content
+    codeCheckDiv.innerHTML = '';
+
+    for( let i = 0; i < 4; i++) {
+        const whitePeg = document.createElement('div');
+        whitePeg.classList.add('peg');
+        whitePeg.innerHTML = PEG.whitePeg;
+        // set divs to inline block
+        // whitePeg.style.display = 'inline-block';
+        codeCheckDiv.appendChild(whitePeg);
+    }
+};
 
 
 function checkGuess() {

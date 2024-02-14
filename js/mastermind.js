@@ -19,7 +19,7 @@ const PEG = {
         // guessColor = computerColor && guessPanel = computerPanel
     whitePeg: '&#9675;',
         // guessColor = computerColor && guessPanel !== computerPanel
-    emptyPeg: ''
+    emptyPeg: '&#735;'
     // QUESTION: Do I need to define a null state i.e. no correct colours
 };
 
@@ -104,7 +104,6 @@ function modalSelect() {
 
             // Change the submit button image based on validateGuess
             if (isValid) {
-                console.log(message);
                 submitGuessButtonImg.disabled = false; // Enable the button
                 submitGuessButtonImg.src = 'assets/icon-check-48-blue.png';
             } else {
@@ -138,7 +137,7 @@ function modalSelect() {
 }
 
 
-
+    
 function clearGuess() {
     const guessCode = document.querySelector('.guessCode');
     const guessPanels = guessCode.querySelectorAll('div');
@@ -148,10 +147,23 @@ function clearGuess() {
             panel.classList.remove('activeGuessBorder');
             panel.classList.remove('codeCheck');
             panel.classList.add('anonymous');
+            panel.classList.remove('red', 'yellow', 'green', 'blue', 'purple', 'orange')
         }
     });
 
-    // set img src of submit button to grey
+    const guessCodeCheck = guessCode.querySelector('.codeCheck');
+    const codeCheckPegs = guessCodeCheck.querySelectorAll('.peg');
+
+    codeCheckPegs.forEach((div, index) => {
+        if (index < 4) {
+            div.classList.remove('blackPeg');
+            div.classList.remove('whitePeg');
+            div.classList.remove('emptyPeg');
+            div.innerHTML = '';
+        }
+    });
+
+    // Set img src of submit button to grey
     const submitGuessButtonImg = document.querySelector('#submitIcon');
     submitGuessButtonImg.src = 'assets/icon-check-48-grey.png';
 
@@ -162,7 +174,7 @@ function clearGuess() {
     const isValid = validateGuess(guessValues);
     console.log('Cleared! Is Guess Valid:', isValid);
 }
-    
+
 
 
 init();
@@ -277,7 +289,7 @@ function init() {
     guessCode.appendChild(codeCheckDiv);
 
     modalSelect();
-    generatePegs();
+    // generatePegs();
 
 }
 
@@ -328,6 +340,7 @@ function getGuessValues() {
         const classList = guessPanels[i].classList;
         for (let className of classList) {
             if (className !== 'activeGuessBorder' && className !== 'codeCheck') {
+            // if (className !== 'activeGuessBorder' && className !== 'codeCheck' && className !== 'anonymous') {
                 guessValues.push(className);
             }
         }
@@ -370,6 +383,9 @@ function submitGuess() {
         return;
     }
 
+    // Call checkGuess after submitting the guess
+    checkGuess(secretCode);
+
     // increment turnCount
     turnCount++;
 
@@ -385,64 +401,96 @@ function submitGuess() {
     const guessCodeCopy = guessCode.cloneNode(true);
 
     // change class of cloned guessCode div to reflect turn number
-    const turnNumber = document.querySelectorAll('.turn').length + 1;
     guessCodeCopy.classList.remove('guessCode');
     guessCodeCopy.classList.add(`turn${turnCount}`);
 
-    // append clone to history secton
-    // const historySection = document.getElementById('history');
+    // append clone to history section
     historySection.appendChild(guessCodeCopy);
 
     // clear the guessCode div
     clearGuess();
-
 }
 
-function generatePegs() {
+
+// function generatePegs() {
+//     const codeCheckDiv = document.querySelector('.codeCheck');
+//     // clear existing content
+//     codeCheckDiv.innerHTML = '';
+
+//     for( let i = 0; i < 4; i++) {
+//         const whitePeg = document.createElement('div');
+//         whitePeg.classList.add('peg');
+//         whitePeg.innerHTML = PEG.whitePeg;
+//         // set divs to inline block
+//         // whitePeg.style.display = 'inline-block';
+//         codeCheckDiv.appendChild(whitePeg);
+//     }
+// };
+
+
+function checkGuess(secretCode) {
+    const guessValues = getGuessValues();
+    console.log("Guess Values:", guessValues);
     const codeCheckDiv = document.querySelector('.codeCheck');
-    // clear existing content
+    // Clear existing content
     codeCheckDiv.innerHTML = '';
 
-    for( let i = 0; i < 4; i++) {
-        const whitePeg = document.createElement('div');
-        whitePeg.classList.add('peg');
-        whitePeg.innerHTML = PEG.whitePeg;
-        // set divs to inline block
-        // whitePeg.style.display = 'inline-block';
-        codeCheckDiv.appendChild(whitePeg);
+    const unmatchedGuessIndices = [];
+    const unmatchedSecretIndices = [];
+
+    // Find black pegs (exact matches)
+    for (let i = 0; i < 4; i++) {
+        if (guessValues[i] === secretCode[i]) {
+            const blackPeg = document.createElement('div');
+            blackPeg.classList.add('peg');
+            blackPeg.classList.add('blackPeg');
+            blackPeg.innerHTML = PEG.blackPeg;
+            codeCheckDiv.appendChild(blackPeg);
+        } else {
+            unmatchedGuessIndices.push(i);
+            unmatchedSecretIndices.push(i);
+        }
     }
-};
+    console.log("Unmatched Guess Indices:", unmatchedGuessIndices);
+    console.log("Unmatched Secret Indices:", unmatchedSecretIndices);
 
+    // Find white pegs (partial matches)
+    for (let i = 0; i < unmatchedGuessIndices.length; i++) {
+        const guessIndex = unmatchedGuessIndices[i];
+        const guessColor = guessValues[guessIndex];
+        for (let j = 0; j < unmatchedSecretIndices.length; j++) {
+            const secretIndex = unmatchedSecretIndices[j];
+            if (guessColor === secretCode[secretIndex]) {
+                const whitePeg = document.createElement('div');
+                whitePeg.classList.add('peg');
+                whitePeg.classList.add('whitePeg');
+                whitePeg.innerHTML = PEG.whitePeg;
+                codeCheckDiv.appendChild(whitePeg);
+                // Remove the matched indices from the unmatched lists
+                unmatchedGuessIndices.splice(i, 1);
+                unmatchedSecretIndices.splice(j, 1);
+                // Decrement loop counters to account for the removal
+                i--;
+                break;
+            }
+        }
+    }
+    console.log("Unmatched Guess Indices after white pegs:", unmatchedGuessIndices);
+    console.log("Unmatched Secret Indices after white pegs:", unmatchedSecretIndices);
 
-function checkGuess() {
-    // create checkArray with four values
-    // compare guessCode array to secretCode array
-
-    // OPTION 1 – how to handle multiples?
-    // forEach index, if guessCode === secretCode
-        // return blackPeg 
-        // push to checkArray
-    // forEach index, if guessCode = same color in secretCode
-        // return whitePeg
-        // push to checkArray
-    // forEach index, if guessCode != same color in secretCode
-        // return emptyPed
-        // push to checkArray
-
-
-    // OPTION 2
-    // forEach coresponding index from guessCode with secretCode i.e. 1/1, 2/2 , 3/3, 4/4
-        // if guessCode[i] === secretCode[i]
-        // return blackPeg
-        // push to checkArray
-    // forEach guessCode[i] !== secretCode[i] ...
-
-    
-    // OPTION 3
-    // 
-    
-    
+    // Fill the remaining spaces with empty pegs
+    const remainingPegs = 4 - (document.querySelectorAll('.peg').length);
+    for (let i = 0; i < remainingPegs; i++) {
+        const emptyPeg = document.createElement('div');
+        emptyPeg.classList.add('peg');
+        emptyPeg.innerHTML = PEG.emptyPeg;
+        codeCheckDiv.appendChild(emptyPeg);
+    }
 }
+
+
+
+
 
 function getWinner() {
     // player wins
@@ -456,4 +504,3 @@ function getWinner() {
             // reveal secretCode
     
 }
-

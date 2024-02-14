@@ -16,7 +16,7 @@ body {
   background-image: url("../assets/pattern-circles-crosses.png");
   background-repeat: repeat repeat;
   background-position: center;
-  background-color: #D7CCC8;
+  background-color: #F5F5F5;
 }
 
 header {
@@ -379,7 +379,7 @@ img {
   h3 {
     font-size: 44px;
     header {
-      height: 183px;
+    height: 183px;
     }
     .container {
       padding: 0 12px;

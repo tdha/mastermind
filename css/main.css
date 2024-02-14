@@ -235,7 +235,7 @@ img {
 }
 
 .activeGuessBorder {
-  border: 1px solid #F50057;
+  border: 10px solid #F50057;
   cursor: pointer;
 }
 

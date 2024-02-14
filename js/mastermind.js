@@ -104,12 +104,10 @@ function modalSelect() {
             // Change the submit button image based on validateGuess
             if (isValid) {
                 console.log(message);
-                // submitGuessButtonImg.style.backgroundColor = 'lightgreen';
                 submitGuessButtonImg.disabled = false; // Enable the button
                 submitGuessButtonImg.src = 'assets/icon-check-48-blue.png';
             } else {
                 submitGuessButtonImg.src = 'assets/icon-check-48-grey.png';
-                // submitGuessButtonImg.style.backgroundColor = none;
                 submitGuessButtonImg.disabled = true; // Disable the button
             }
 
@@ -119,17 +117,21 @@ function modalSelect() {
     // Add event listener to each panel div to track the selected panel
     document.querySelectorAll('.guessCode > div').forEach(panel => {
         panel.addEventListener('click', function() {
-            selectedPanel = panel;
-            // Highlight the selected panel or add any other visual indication if needed
-            panel.classList.add('activeGuessBorder');
+            // Check if the clicked panel is not a codeCheck panel
+            if (!panel.classList.contains('codeCheck')) {
+                selectedPanel = panel;
 
-            // Remove the 'activeGuessBorder' class from all other panels
-            const guessPanels = document.querySelectorAll('.guessCode > div > div');
-            guessPanels.forEach(guessPanel => {
-                if (guessPanel !== panel) {
-                    guessPanel.classList.remove('activeGuessBorder');
-                }
-            });
+                // Add border treatment to the clicked panel
+                panel.classList.add('activeGuessBorder');
+
+                // Remove the 'activeGuessBorder' class from all other panels
+                const guessPanels = document.querySelectorAll('.guessCode > div');
+                guessPanels.forEach(guessPanel => {
+                    if (guessPanel !== panel) {
+                        guessPanel.classList.remove('activeGuessBorder');
+                    }
+                });
+            }
         });
     });
 }

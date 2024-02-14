@@ -17,8 +17,9 @@ const ANONYMOUS = 'assets/anonymous.png';
 const PEG = {
     blackPeg: '&#9679;',
         // guessColor = computerColor && guessPanel = computerPanel
-    whitePeg: '&#9675;'
+    whitePeg: '&#9675;',
         // guessColor = computerColor && guessPanel !== computerPanel
+    emptyPeg: ''
     // QUESTION: Do I need to define a null state i.e. no correct colours
 };
 
@@ -137,23 +138,6 @@ function modalSelect() {
 }
 
 
-// function clearGuess() {
-//     const guessPanels = document.querySelectorAll('.guessCode > div');
-//     guessPanels.forEach((panel, index) => {
-//         if (index < 4) {
-//             panel.classList.remove('activeGuessBorder');
-//             panel.classList.remove('codeCheck');
-//             panel.classList.add('anonymous');
-//         }
-//     });
-
-//     // Get the guess values after clearing and resetting the panels
-//     const guessValues = getGuessValues();
-
-//     // Check if the guess is valid after every click on the modal
-//     const isValid = validateGuess(guessValues);
-//     console.log('Cleared! Is Guess Valid:', isValid);
-// }
 
 function clearGuess() {
     const guessCode = document.querySelector('.guessCode');
@@ -431,10 +415,45 @@ function generatePegs() {
 
 
 function checkGuess() {
+    // create checkArray with four values
+    // compare guessCode array to secretCode array
+
+    // OPTION 1 – how to handle multiples?
+    // forEach index, if guessCode === secretCode
+        // return blackPeg 
+        // push to checkArray
+    // forEach index, if guessCode = same color in secretCode
+        // return whitePeg
+        // push to checkArray
+    // forEach index, if guessCode != same color in secretCode
+        // return emptyPed
+        // push to checkArray
+
+
+    // OPTION 2
+    // forEach coresponding index from guessCode with secretCode i.e. 1/1, 2/2 , 3/3, 4/4
+        // if guessCode[i] === secretCode[i]
+        // return blackPeg
+        // push to checkArray
+    // forEach guessCode[i] !== secretCode[i] ...
+
+    
+    // OPTION 3
+    // 
+    
     
 }
 
 function getWinner() {
+    // player wins
+    // if guessCodeArr[0] === secretCodeArr[0] &&
+        // guessCodeArr[1] === secretCodeArr[1] &&
+        // guessCodeArr[2] === secretCodeArr[2] &&
+        // guessCodeArr[3] === secretCodeArr[3] &&
+            // display 4 blackPegs
+            // set win condition to true/win
+            // alert player (message)
+            // reveal secretCode
     
 }
 

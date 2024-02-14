@@ -164,12 +164,11 @@ img {
 }
 
 #controls {  
-  /* display: flex;
-  flex-direction: row; */
+  display: grid;
+  grid-template-columns: 4fr 1fr;
   margin-top: 24px;
   width: 100%;
   max-width: 1000px;
-  /* align-items: center; */
 } 
 
 #actions {

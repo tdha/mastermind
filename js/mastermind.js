@@ -22,7 +22,7 @@ const PEG = {
     // guessColor[i] = computerColor[i] && guessPanel[i] !== computerPanel[i]
     whitePeg: '&#9675;',
     // guessColor[i] = !computerColor[i]
-    emptyPeg: '&#8210;'
+    emptyPeg: '&#8231;'
 };
 
 const newGameButton = document.getElementById('refresh');

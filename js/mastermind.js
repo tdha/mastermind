@@ -25,12 +25,41 @@ const PEG = {
     emptyPeg: '&#8231;'
 };
 
+const AUDIOLIST = [
+    new Audio('assets/audio/pimpyall.mp3'),
+    new Audio('assets/audio/excuse.mp3'),
+    new Audio('assets/audio/lalala.mp3'),
+    new Audio('assets/audio/crazy.mp3'),
+    new Audio('assets/audio/rock.mp3'),
+    new Audio('assets/audio/thank.mp3'),
+    new Audio('assets/audio/dance.mp3'),
+    new Audio('assets/audio/what.mp3')
+];
+
 const newGameButton = document.getElementById('refresh');
 const submitGuessButton = document.getElementById('submit');
 const submitGuessButtonImg = document.getElementById('submitIcon');
 const clearGuessButton = document.getElementById('clear');
 const clearGuessButtonImg = document.getElementById('clearIcon');
 const headerGetWinner = document.querySelector('header');
+
+const soundEleven = new Audio('assets/audio/11-eleven.mp3');
+const soundTen = new Audio('assets/audio/10-ten.mp3');
+const soundNine = new Audio('assets/audio/9-nine.mp3');
+const soundEight = new Audio('assets/audio/8-eight.mp3');
+const soundSeven = new Audio('assets/audio/7-seven.mp3');
+const soundSix = new Audio('assets/audio/6-six.mp3');
+const soundFive = new Audio('assets/audio/5-five.mp3');
+const soundFour = new Audio('assets/audio/4-four.mp3');
+const soundThree = new Audio('assets/audio/3-three.mp3');
+const soundTwo = new Audio('assets/audio/2-two.mp3');
+const soundOne = new Audio('assets/audio/1-one.mp3');
+
+const soundCheer = new Audio('assets/audio/cheer.mp3');
+const soundDie = new Audio('assets/audio/die.mp3');
+const soundFalling = new Audio('assets/audio/falling.mp3');
+
+const randomSounds = document.querySelectorAll('.randomSoundId');
 
 
 /*----- STATE VARIABLES -----*/
@@ -50,6 +79,8 @@ let turnCountdown = 12;
 const people = Object.keys(PERSON);
 let secretCode = generateSecretCode();
 let historySection = document.getElementById('history');
+
+let clickCounter = 0;
 
 
 /*----- CACHED ELEMENTS  -----*/
@@ -404,6 +435,44 @@ function submitGuess() {
     // clear the guessCode div
     clearGuess();
     getWinner();
+
+    // turnCountdown plays sound for that turn.
+    if (turnCountdown === 11) {
+        soundEleven.play();
+    }
+    if (turnCountdown === 10) {
+        soundTen.play();
+    }
+    if (turnCountdown === 9) {
+        soundNine.play();
+    }
+    if (turnCountdown === 8) {
+        soundEight.play();
+    }
+    if (turnCountdown === 7) {
+        soundSeven.play();
+    }
+    if (turnCountdown === 6) {
+        soundSix.play();
+    }
+    if (turnCountdown === 5) {
+        soundFive.play();
+    }
+    if (turnCountdown === 4) {
+        soundFour.play();
+    }
+    if (turnCountdown === 3) {
+        soundThree.play();
+        setTimeout(() => {
+            soundDie.play();
+        }, 1000);
+    }
+    if (turnCountdown === 2) {
+        soundTwo.play();
+    }
+    if (turnCountdown === 1) {
+        soundOne.play();
+    }
 }
 
 
@@ -491,10 +560,6 @@ function getWinner() {
     // Check if the player has won
     const codeCheckDiv = document.querySelector('.guessCode > .codeCheck');
     const blackPegs = codeCheckDiv.querySelectorAll('.blackPeg');
-    
-    console.log(turnCountdown);
-    console.log(blackPegs);
-    console.log(codeCheckDiv);
 
     // Check if the player has four black pegs and turn countdown has not reached 0
     if (blackPegs.length === 4) {
@@ -505,6 +570,9 @@ function getWinner() {
         message.innerText = "Player wins!";
         clearGuessButtonImg.src = 'assets/icon-cancel-48-grey.png';
 
+        // Play victory sound
+        soundCheer.play();
+
         // Show computer's secret code
         const computerCodeDiv = document.querySelector('.computerCode');
         computerCodeDiv.innerHTML = '';
@@ -514,6 +582,7 @@ function getWinner() {
             computerCodeDiv.appendChild(panelDiv);
         }
 
+        // Exit the function after handling player win condition
         return;
     }
     
@@ -524,6 +593,9 @@ function getWinner() {
         message.style.color = '#FFB74D';
         message.innerText = "You lose!";
         clearGuessButtonImg.src = 'assets/icon-cancel-48-grey.png';
+
+        // Play losing sound
+        soundFalling.play();
         
         // Show computer's secret code
         const computerCodeDiv = document.querySelector('.computerCode');
@@ -536,3 +608,21 @@ function getWinner() {
         return;
     }
 }
+
+randomSounds.forEach(randomSound => {
+    randomSound.addEventListener('click', function() {
+    // Increment click counter
+    clickCounter++;
+
+    // Random number to space out sound on clicks
+    const randomN = Math.floor(Math.random() * 10) + 1;
+
+    if (clickCounter % randomN === 0) {
+        // Randomly select an audio element from the audioList
+        const randomIndex = Math.floor(Math.random() * AUDIOLIST.length);
+        const randomAudio = AUDIOLIST[randomIndex];
+
+        randomAudio.play();
+        }
+    })
+});

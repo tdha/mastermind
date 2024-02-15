@@ -28,6 +28,9 @@ const newGameButton = document.getElementById('refresh');
 const submitGuessButton = document.getElementById('submit');
 const submitGuessButtonImg = document.getElementById('submitIcon');
 const clearGuessButton = document.getElementById('clear');
+const clearGuessButtonImg = document.getElementById('clearIcon');
+
+const headerGetWinner = document.querySelector('header');
 
 
 /*----- STATE VARIABLES -----*/
@@ -47,7 +50,7 @@ let secretCode = generateSecretCode();
 let historySection = document.getElementById('history');
 
 /*----- CACHED ELEMENTS  -----*/
-const message = document.querySelector('h1');
+let message = document.querySelector('h1');''
 
 
 /*----- EVENT LISTENERS -----*/
@@ -104,7 +107,7 @@ function modalSelect() {
 
             // Change the submit button image based on validateGuess
             if (isValid) {
-                submitGuessButtonImg.disabled = false; // Enable the button
+                submitGuessButtonImg.disabled = false; // Enable the button                
                 submitGuessButtonImg.src = 'assets/icon-check-48-blue.png';
             } else {
                 submitGuessButtonImg.src = 'assets/icon-check-48-grey.png';
@@ -151,17 +154,17 @@ function clearGuess() {
         }
     });
 
-    const guessCodeCheck = guessCode.querySelector('.codeCheck');
-    const codeCheckPegs = guessCodeCheck.querySelectorAll('.peg');
+    // const guessCodeCheck = guessCode.querySelector('.codeCheck');
+    // const codeCheckPegs = guessCodeCheck.querySelectorAll('.peg');
 
-    codeCheckPegs.forEach((div, index) => {
-        if (index < 4) {
-            div.classList.remove('blackPeg');
-            div.classList.remove('whitePeg');
-            div.classList.remove('emptyPeg');
-            div.innerHTML = '';
-        }
-    });
+    // codeCheckPegs.forEach((div, index) => {
+    //     if (index < 4) {
+    //         div.classList.remove('blackPeg');
+    //         div.classList.remove('whitePeg');
+    //         div.classList.remove('emptyPeg');
+    //         div.innerHTML = '';
+    //     }
+    // });
 
     // Set img src of submit button to grey
     const submitGuessButtonImg = document.querySelector('#submitIcon');
@@ -182,8 +185,11 @@ init();
 function init() {
     winner = null;
         // Winner is cleared i.e. no winner
-
+    headerGetWinner.style.backgroundColor = 'rgba(176, 190, 197, 0.96)';
+    message.style.color = '#37474F';
     message.innerText = 'Mastermole!';
+    clearGuessButtonImg.src = 'assets/icon-cancel-48.svg';
+
 
     const computerCode = document.querySelector('.computerCode')
     computerCode.innerHTML = '';
@@ -321,15 +327,6 @@ function generateSecretCode() {
 }
 
 
-// game sequence
-    // make a currentGuess by selecting four people (popup per person)
-    // submit currentGuess
-    // currentGuess clears
-    // guess now shows in history (scrollable)
-    // guess in history shows checkGuess (black peg, white peg, null)
-    // turn -1
-
-
 function getGuessValues() {
     const guessPanels = document.querySelectorAll('.guessCode > div');
     const guessValues = [];
@@ -409,6 +406,7 @@ function submitGuess() {
 
     // clear the guessCode div
     clearGuess();
+    getWinner();
 }
 
 
@@ -489,18 +487,42 @@ function checkGuess(secretCode) {
 }
 
 
-
-
-
 function getWinner() {
-    // player wins
-    // if guessCodeArr[0] === secretCodeArr[0] &&
-        // guessCodeArr[1] === secretCodeArr[1] &&
-        // guessCodeArr[2] === secretCodeArr[2] &&
-        // guessCodeArr[3] === secretCodeArr[3] &&
-            // display 4 blackPegs
-            // set win condition to true/win
-            // alert player (message)
-            // reveal secretCode
+    // Check if the player has won
+    const codeCheckDiv = document.querySelector('.codeCheck');
+    const blackPegs = codeCheckDiv.querySelectorAll('.blackPeg');
     
+    // Player wins if there are 4 black pegs and turnCountdown is greater than 0
+    if (blackPegs.length === 4 && turnCountdown > 0) {
+        // Set message to indicate player wins
+        headerGetWinner.style.backgroundColor = '#C6FF00';
+        message.style.color = '#1B5E20';
+        message.innerText = "Player wins!";
+        // clearGuessButton.style.visibility = 'hidden';
+        // submitGuessButton.style.visibility = 'hidden';
+        clearGuessButtonImg.src = 'assets/icon-cancel-48-grey.png';
+        // submitGuessButtonImg.disabled = true; // Disable the button
+        return;
+    }
+    
+    // Check if the computer has won
+    if (turnCountdown === 0 && !winner) {
+        // Set message to indicate computer wins
+        headerGetWinner.style.backgroundColor = '#FF1744';
+        message.style.color = '#FFFFFF';
+        message.innerText = "You lose!";
+        clearGuessButtonImg.src = 'assets/icon-cancel-48-grey.png';
+        
+        // Show computer's secret code
+        // TODO FIX BUG 
+        const computerCodeDiv = document.querySelector('.computerCode');
+        computerCodeDiv.innerHTML = '';
+        for (let i = 0; i < secretCode.length; i++) {
+            const panelDiv = document.createElement('div');
+            panelDiv.innerHTML = `<img src="${PERSON[secretCode[i]]}" alt="Portrait">`;
+            computerCodeDiv.appendChild(panelDiv);
+        }
+        
+        return;
+    }
 }

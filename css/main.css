@@ -47,12 +47,12 @@ h1 {
 
 h2 {
   font-size: 48px;
-  /* line-height: 0px; */
 }
 
 h3 {
   font-family: "Luckiest Guy", cursive;
   font-size: 88px;
+  margin-bottom: -20%;
 }
 
 button {
@@ -80,8 +80,10 @@ img {
 
 .turn {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #CFD8DC;
 }
 
 .icon:hover {
@@ -113,11 +115,12 @@ img {
   grid-template-columns: repeat(5, 1fr);
   gap: 2px;
   margin: 0 0 8px 0;
+  max-width: 75%;
 }
 
 #guess {
   padding: 16px 12px 24px 12px;
-  background-color:rgba(239, 235, 233, 0.3);
+  background-color:rgba(250, 250, 250, 0.8);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -339,7 +342,7 @@ img {
       background-size: 75%;
   }
   .peg {
-    font-size: 28px;
+    font-size: 26px;
   }
   h3 {
     font-size: 48px;

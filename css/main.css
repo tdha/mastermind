@@ -13,7 +13,7 @@ body {
   flex-direction: column;
   /* align-items:flex-end; */
   justify-content: space-between;
-  background-image: url("../assets/pattern-circles-crosses.png");
+  background-image: url("../assets/pattern-circles-crosses.gif");
   background-repeat: repeat repeat;
   background-position: center;
   background-color: #F5F5F5;
@@ -22,7 +22,7 @@ body {
 header {
   padding: 36px 12px 12px 12px;
   padding-top: 36px;
-  background-color:rgba(176, 190, 197, 0.96);
+  background-color: #ECEFF1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,7 +117,7 @@ img {
 
 #guess {
   padding: 16px 12px 24px 12px;
-  background-color:rgba(255, 255, 255, 0.7);
+  background-color:rgba(239, 235, 233, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -244,27 +244,27 @@ img {
 }
 
 .blue {
-  content: url(../assets/blue.png);
+  content: url(../assets/blue.gif);
   width: 100%;
 }
 
 .orange {
-  content: url(../assets/orange.png);
+  content: url(../assets/orange.gif);
   width: 100%;
 }
 
 .purple {
-  content: url(../assets/purple.png);
+  content: url(../assets/purple.gif);
   width: 100%;
 }
 
 .red {
-  content: url(../assets/red.png);
+  content: url(../assets/red.gif);
   width: 100%;
 }
 
 .yellow {
-  content: url(../assets/yellow.png);
+  content: url(../assets/yellow.gif);
   width: 100%;
 }
 

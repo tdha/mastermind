@@ -6,11 +6,11 @@
 /*----- CONSTANTS -----*/
 const PERSON = {
     green: 'assets/green.gif', 
-    red: 'assets/red.png',
-    blue: 'assets/blue.png',
-    purple: 'assets/purple.png',
-    orange: 'assets/orange.png',
-    yellow: 'assets/yellow.png',
+    red: 'assets/red.gif',
+    blue: 'assets/blue.gif',
+    purple: 'assets/purple.gif',
+    orange: 'assets/orange.gif',
+    yellow: 'assets/yellow.gif',
 };
 
 const MYSTERY = 'assets/mystery.png';
@@ -30,7 +30,6 @@ const submitGuessButton = document.getElementById('submit');
 const submitGuessButtonImg = document.getElementById('submitIcon');
 const clearGuessButton = document.getElementById('clear');
 const clearGuessButtonImg = document.getElementById('clearIcon');
-
 const headerGetWinner = document.querySelector('header');
 
 
@@ -290,7 +289,6 @@ function init() {
     // create and append the codeCheck div
     const codeCheckDiv = document.createElement('div');
     codeCheckDiv.classList.add('codeCheck');
-    // codeCheckDiv.innerHTML = '<h2>&#9679;&#9675;&#9675;&#9675;</h2>'
     guessCode.appendChild(codeCheckDiv);
 
     modalSelect();
@@ -507,6 +505,15 @@ function getWinner() {
         message.innerText = "Player wins!";
         clearGuessButtonImg.src = 'assets/icon-cancel-48-grey.png';
 
+        // Show computer's secret code
+        const computerCodeDiv = document.querySelector('.computerCode');
+        computerCodeDiv.innerHTML = '';
+        for (let i = 0; i < secretCode.length; i++) {
+            const panelDiv = document.createElement('div');
+            panelDiv.innerHTML = `<img src="${PERSON[secretCode[i]]}" alt="Portrait">`;
+            computerCodeDiv.appendChild(panelDiv);
+        }
+
         return;
     }
     
@@ -514,7 +521,7 @@ function getWinner() {
     if (turnCountdown === 0 && winner !== true) {
         // Set message to indicate computer wins
         headerGetWinner.style.backgroundColor = '#FF1744';
-        message.style.color = '#FFFFFF';
+        message.style.color = '#FFB74D';
         message.innerText = "You lose!";
         clearGuessButtonImg.src = 'assets/icon-cancel-48-grey.png';
         

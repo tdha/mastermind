@@ -6,8 +6,8 @@ A battle of wits as you race to expose the enemy's team of operatives. Play the 
 + Background
 + How to Play
 + Features
-+ Technologies Used
-+ Code Examples
++ Screenshots
++ Technologies
 + Build Status
 + Credits
 + Licence
@@ -62,27 +62,39 @@ Sound is added in three places.
 2. The countdown time is verbalised. After each turn, the number will be announced. At count three (3), an additional soundbyte plays.
 3. Upon winning or losing, a corresponding soundbyte will play.
 
+## Screenshots
+[Game in progress](https://i.imgur.com/S5y00nM.png)
+[Colour selection modal](https://i.imgur.com/J3Fsdb8.png)
+[Player wins screen](https://i.imgur.com/sRgvpL3.png)
 
 
 
 
+## Technologies.
+Mastermole! is built with HTML, CSS, and Javascript (JS). This application works on Chrome (Version 121.0.6167.160).
+Assets include GIF and PNG for images and MP3 for audio.
+
+## Build status
+Version 1.0: 2024.02.16: Project presentation and delivery.
+
+### Known bugs
++ Guess validation does not always show 4 pegs (black / white / empty).
++ On submitting a guess, the Player zone does not completely cler i.e. validation pegs from previous guess persist.
++ On winning or losing, the countdown timer disappears.
++ No error modal when guess is submitted with less than four colours.
 
 
-
-
-Build status
-- known bugs
-
-## Code Style
 
 ## Screenshots
 
-## Tech/Framework Used
+
 
 
 
 
 
 ## Credits
+
+Images by [pikisuperstar](https://www.freepik.com/free-vector/hand-drawn-people-avatar-collection_5183191.htm#page=2&query=faces&position=42&from_view=author&uuid=fbd8a1cd-6c97-4370-a12a-7c4e689c03fe).
 
 ## Licence

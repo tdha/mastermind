@@ -69,9 +69,6 @@ Sound is added in three places.
 
 [Player wins screen](https://i.imgur.com/sRgvpL3.png)
 
-
-
-
 ## Technologies.
 Mastermole! is built with HTML, CSS, and Javascript (JS). This application works on Chrome (Version 121.0.6167.160).
 Assets include GIF and PNG for images and MP3 for audio.
@@ -85,18 +82,11 @@ Version 1.0: 2024.02.16: Project presentation and delivery.
 + On winning or losing, the countdown timer disappears.
 + No error modal when guess is submitted with less than four colours.
 
-
-
-## Screenshots
-
-
-
-
-
-
-
 ## Credits
-
+Joel and CJ for their commitment, dedication, and expertise.
+Triin for chats and a laugh.
+General Assembly for an amazing start to the course.
 Images by [pikisuperstar](https://www.freepik.com/free-vector/hand-drawn-people-avatar-collection_5183191.htm#page=2&query=faces&position=42&from_view=author&uuid=fbd8a1cd-6c97-4370-a12a-7c4e689c03fe).
 
 ## Licence
+TBC.

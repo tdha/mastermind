@@ -15,16 +15,15 @@ const MYSTERY = 'assets/mystery.png';
 const ANONYMOUS = 'assets/anonymous.png';
 
 const PEG = {
+    // guessColor[i] = computerColor[i] && guessPanel[i] = computerPanel[i]
     blackPeg: '&#9679;',
-        // guessColor = computerColor && guessPanel = computerPanel
+    // guessColor[i] = computerColor[i] && guessPanel[i] !== computerPanel[i]
     whitePeg: '&#9675;',
-        // guessColor = computerColor && guessPanel !== computerPanel
+    // guessColor[i] = !computerColor[i]
     emptyPeg: '&#735;'
-    // QUESTION: Do I need to define a null state i.e. no correct colours
 };
 
 const newGameButton = document.getElementById('refresh');
-// const submitGuessButton = document.querySelector('.submit');
 const submitGuessButton = document.getElementById('submit');
 const submitGuessButtonImg = document.getElementById('submitIcon');
 const clearGuessButton = document.getElementById('clear');
@@ -34,10 +33,8 @@ const headerGetWinner = document.querySelector('header');
 
 
 /*----- STATE VARIABLES -----*/
-// let check;
 let turnCount = 0;
 let winner; 
-    // null = no winner; 
     // 'lose' = guess !== computerCode && turn === '0'; 
     // 'win' = guess === computerCode && turn > 0;
 let computerCode;
@@ -60,18 +57,10 @@ clearGuessButton.addEventListener('click', clearGuess);
 
 
 /*----- FUNCTIONS -----*/
-
 // guess selection modal
 const modal = document.getElementById("guessModal");
-    // Get the modal
-// const buttonOpenModal = document.getElementById("buttonModal");
-    // Get the button that opens the modal
+// Get the button that opens the modal
 const span = document.getElementsByClassName("close")[0];
-    // Get the <span> element that closes the modal
-// buttonOpenModal.addEventListener("click", function() {
-    // modal.style.display = "block";
-    // When the user clicks the button, open the modal 
-    // });
 span.addEventListener("click", function() {
     modal.style.display = "none";
     // When the user clicks on <span> (x), close the modal
@@ -84,7 +73,6 @@ window.addEventListener("click", function(event) {
     });
 
   
-
 function modalSelect() {
     let selectedPanel;
 
@@ -191,26 +179,29 @@ function init() {
     clearGuessButtonImg.src = 'assets/icon-cancel-48.svg';
 
 
+    // clear existing content in computerCode
     const computerCode = document.querySelector('.computerCode')
     computerCode.innerHTML = '';
-        // clear existing content in computerCode
 
+    // clear existing content in guessCode
     const guessCode = document.querySelector('.guessCode')
     guessCode.innerHTML = '';
-        // clear existing content in guessCode
 
 
+    // generate new secret code
     secretCode = generateSecretCode();
     console.log("Secret code log ", secretCode);
-        // generate new secret code
 
 
+    // history is cleared
     history = '';
-        // history is cleared
+
+ // DO I NEED THIS?   
+    // currentGuess is empty
+    // checkGuess is hidden; visible when turn is submitted
     currentGuess = '';
-        // currentGuess is empty
+
     check = '';
-        // checkGuess is hidden; visible when turn is submitted
     turnCount = 0;
     turnCountdown = 12;
     historySection.innerHTML = '';
@@ -429,7 +420,7 @@ function submitGuess() {
 function checkGuess(secretCode) {
     const guessValues = getGuessValues();
     console.log("Guess Values:", guessValues);
-    const codeCheckDiv = document.querySelector('.codeCheck');
+    const codeCheckDiv = document.querySelector('.guessCode .codeCheck');
     // Clear existing content
     codeCheckDiv.innerHTML = '';
 

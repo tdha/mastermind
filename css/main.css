@@ -13,7 +13,7 @@ body {
   flex-direction: column;
   /* align-items:flex-end; */
   justify-content: space-between;
-  background-image: url("/assets/pattern-circles-crosses.png");
+  background-image: url("../assets/pattern-circles-crosses.png");
   background-repeat: repeat repeat;
   background-position: center;
   background-color: #F5F5F5;
@@ -239,43 +239,39 @@ img {
 }
 
 .green {
-  content: url(/assets/green.gif);
+  content: url(../assets/green.gif);
   width: 100%;
 }
 
 .blue {
-  content: url(/assets/blue.png);
+  content: url(../assets/blue.png);
   width: 100%;
 }
 
 .orange {
-  content: url(/assets/orange.png);
+  content: url(../assets/orange.png);
   width: 100%;
 }
 
 .purple {
-  content: url(/assets/purple.png);
+  content: url(../assets/purple.png);
   width: 100%;
 }
 
 .red {
-  content: url(/assets/red.png);
+  content: url(../assets/red.png);
   width: 100%;
 }
 
 .yellow {
-  content: url(/assets/yellow.png);
+  content: url(../assets/yellow.png);
   width: 100%;
 }
 
 .anonymous {
-  content: url(/assets/anonymous.png);
+  content: url(../assets/anonymous.png);
   width: 100%;
 }
-
-/* .submit {
-  content: url(/assets/icon-check-48-grey.png);
-} */
 
 @media screen and (max-width: 992px) {
   body {

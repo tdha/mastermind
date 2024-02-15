@@ -1,8 +1,3 @@
-/*----- TODO -----*/
-// checks show 4 pegs
-// clearGuess clears check pegs
-// time turnCountdown on win/lose condition (and reset it with clearGuess)
-
 /*----- CONSTANTS -----*/
 const PERSON = {
     green: 'assets/green.gif', 
@@ -17,11 +12,8 @@ const MYSTERY = 'assets/mystery.png';
 const ANONYMOUS = 'assets/anonymous.png';
 
 const PEG = {
-    // guessColor[i] = computerColor[i] && guessPanel[i] = computerPanel[i]
     blackPeg: '&#9679;',
-    // guessColor[i] = computerColor[i] && guessPanel[i] !== computerPanel[i]
     whitePeg: '&#9675;',
-    // guessColor[i] = !computerColor[i]
     emptyPeg: '&#8231;'
 };
 
@@ -65,26 +57,17 @@ const randomSounds = document.querySelectorAll('.randomSoundId');
 /*----- STATE VARIABLES -----*/
 let turnCount = 0;
 let winner;
-    // 'lose' = guess !== computerCode && turn === '0'; 
-    // 'win' = guess === computerCode && turn > 0;
 let computerCode;
 let history;
-
-// variable to store the interval for the turn countdown
-// for when a timer (seconds) is added
-// IS THIS NEEDED RIGHT NOW?
-let turnInterval;
-
 let turnCountdown = 12;
 const people = Object.keys(PERSON);
-let secretCode = generateSecretCode();
-let historySection = document.getElementById('history');
-
 let clickCounter = 0;
 
 
 /*----- CACHED ELEMENTS  -----*/
 let message = document.querySelector('h1');''
+let secretCode = generateSecretCode();
+let historySection = document.getElementById('history');
 
 
 /*----- EVENT LISTENERS -----*/
@@ -94,7 +77,6 @@ clearGuessButton.addEventListener('click', clearGuess);
 
 
 /*----- FUNCTIONS -----*/
-// guess selection modal
 // Get the button that opens the modal
 const modal = document.getElementById("guessModal");
 // When the user clicks on <span> (x), close the modal
@@ -140,7 +122,6 @@ function modalSelect() {
                 // Disable the button
                 submitGuessButtonImg.disabled = true; 
             }
-
         });
     });
 
@@ -180,18 +161,6 @@ function clearGuess() {
         }
     });
 
-    // const guessCodeCheck = guessCode.querySelector('.codeCheck');
-    // const codeCheckPegs = guessCodeCheck.querySelectorAll('.peg');
-
-    // codeCheckPegs.forEach((div, index) => {
-    //     if (index < 4) {
-    //         div.classList.remove('blackPeg');
-    //         div.classList.remove('whitePeg');
-    //         div.classList.remove('emptyPeg');
-    //         div.innerHTML = '';
-    //     }
-    // });
-
     // Set img src of submit button to grey
     const submitGuessButtonImg = document.querySelector('#submitIcon');
     submitGuessButtonImg.src = 'assets/icon-check-48-grey.png';
@@ -209,7 +178,7 @@ init();
 
 
 function init() {
-    // Winner is cleared i.e. no winner
+    
     winner = null;
 
     // clear styles applied when win or lose condition is triggered
@@ -230,12 +199,9 @@ function init() {
     secretCode = generateSecretCode();
     console.log("Secret code log ", secretCode);
 
-
     // history is cleared
     history = '';
 
- // DO I NEED THIS?   
-    // currentGuess is empty
     // checkGuess is hidden; visible when turn is submitted
     currentGuess = '';
 
@@ -245,54 +211,43 @@ function init() {
     historySection.innerHTML = '';
     submitGuessButtonImg.src = 'assets/icon-check-48-grey.png';
 
-
     // Resetting the computer code's portrait images to MYSTERY.
     for (let i = 0; i < 4; i++) {
         const panelDiv = document.createElement('div');
-            // create new dvis
-        // panelDiv.classList.add('panel' + (i + 1));
-            // add the classes
         const mysteryImg = document.createElement('img');
-            // create img tags
         mysteryImg.src = MYSTERY;
         mysteryImg.alt = 'Illustration of a person in silhouette with question mark.';
         panelDiv.appendChild(mysteryImg);
         computerCode.appendChild(panelDiv);
-            // insert MYSTERY image into each div within computerCode
     }
 
     // create and append the turn div
     const turnDiv = document.createElement('div');
     turnDiv.classList.add('turn');
     turnDiv.innerHTML = `<h3>${turnCountdown}</h3>`
-        // initial countdown value
     computerCode.appendChild(turnDiv);
-
-
 
     // Resetting the guess area's portrait images to ANONYMOUS.
     for (let i = 0; i < 4; i++) {
         const guessPanel = document.createElement('div');
-            // create new dvis
-        // guessPanel.classList.add('panel' + (i + 1));
+        // add the classes
         guessPanel.classList.add('anonymous');
-            // add the classes
+        // add the ID attribute
         guessPanel.id = 'buttonModal'
-            // add the ID attribute
+        // create img tags
         const anonymousImg = document.createElement('img');
-            // create img tags
         anonymousImg.src = ANONYMOUS;
         anonymousImg.alt = 'Illustration of a person in silhouette.';
         guessPanel.appendChild(anonymousImg);
+        // insert ANONYMOUS image into each div within guessCode
         guessCode.appendChild(guessPanel);
-            // insert ANONYMOUS image into each div within guessCode
-    
-            // attach event listener to div to open modal
-            guessPanel.addEventListener('click', function() {
-                modal.style.display = 'block';
-                guessPanel.classList.add('activeGuessBorder');
-                    // to highlight active guess
-            });
+
+        // attach event listener to div to open modal
+        guessPanel.addEventListener('click', function() {
+            modal.style.display = 'block';
+            // to highlight active guess
+            guessPanel.classList.add('activeGuessBorder');
+        });
     }
 
     // When the modal closes via click(x), remove the 'activeGuessBorder' class from all panels
@@ -300,8 +255,8 @@ function init() {
         modal.style.display = "none";
         const guessPanels = document.querySelectorAll('.guessCode > div');
         guessPanels.forEach(panel => {
-            panel.classList.remove('activeGuessBorder'); 
             // Remove class when modal closes
+            panel.classList.remove('activeGuessBorder'); 
         });
     });
 
@@ -311,8 +266,8 @@ function init() {
             modal.style.display = "none";
         const guessPanels = document.querySelectorAll('.guessCode > div');
         guessPanels.forEach(panel => {
-            panel.classList.remove('activeGuessBorder'); 
             // Remove class when modal closes
+            panel.classList.remove('activeGuessBorder'); 
             });
         }
     });
@@ -323,13 +278,12 @@ function init() {
     guessCode.appendChild(codeCheckDiv);
 
     modalSelect();
-    // generatePegs();
-
 }
 
-function render() {
-    // QUESTION: what needs to go here?
-}
+
+// function render() {
+//     // QUESTION: what needs to go here?
+// }
 
 // generate a secret code from shuffling PEOPLE
     // found: Fisher-Yates shuffle algorithm (Knuth shuffle)

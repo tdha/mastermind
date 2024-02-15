@@ -51,7 +51,7 @@ This application includes the following breakpoints:
 * 575px
 * 768px
 * 992px
-* > 1000px
+* 1000px +
 
 ### Animated illustrations
 To build the espionage theme (uncover the 'mole' in Mastermind), character illustrations give the colours an identity. Future versions may be more sophisticated in animation and interaction beyond the low-frame animated gifs.
@@ -64,7 +64,9 @@ Sound is added in three places.
 
 ## Screenshots
 [Game in progress](https://i.imgur.com/S5y00nM.png)
+
 [Colour selection modal](https://i.imgur.com/J3Fsdb8.png)
+
 [Player wins screen](https://i.imgur.com/sRgvpL3.png)
 
 

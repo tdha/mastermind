@@ -281,12 +281,7 @@ function init() {
 }
 
 
-// function render() {
-//     // QUESTION: what needs to go here?
-// }
-
 // generate a secret code from shuffling PEOPLE
-    // found: Fisher-Yates shuffle algorithm (Knuth shuffle)
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -294,15 +289,16 @@ function shuffle(array) {
     }
     return array;
 }
-    // generating secret code that allows for duplicates
+   
+
+// generating secret code that allows for duplicates
 function generateSecretCode() {
+    // shuffle PEOPLE array
     const shuffledPeople = shuffle(people);
-        // shuffle PEOPLE array
     const secretCode = [];
     for (let i = 0; i < 4; i++) {
-        // iterates for times for each code sequence
+        // selects a random value with each iteration
         const randomIndex = Math.floor(Math.random() * shuffledPeople.length);
-            // selects a random value with each iteration
         secretCode.push(shuffledPeople[randomIndex]);
     }
     return secretCode; 
@@ -312,14 +308,11 @@ function generateSecretCode() {
 function getGuessValues() {
     const guessPanels = document.querySelectorAll('.guessCode > div');
     const guessValues = [];
-    // Iterate over the first four panels
     for (let i = 0; i < 4; i++) {
-        // OLD: guessValues.push(guessPanels[i].classList[0]);
         // extract the colour value form the class list
         const classList = guessPanels[i].classList;
         for (let className of classList) {
             if (className !== 'activeGuessBorder' && className !== 'codeCheck') {
-            // if (className !== 'activeGuessBorder' && className !== 'codeCheck' && className !== 'anonymous') {
                 guessValues.push(className);
             }
         }
@@ -338,10 +331,10 @@ function validateGuess() {
             return false;
         }
     }
-
     // All values in guessValues are keys in PERSON
     return true;
 }
+
 
 console.log(validateGuess(PERSON));
 
@@ -350,7 +343,6 @@ function submitGuess() {
     // check guess is filled with four suspects
     const guessValues = getGuessValues();
     if (guessValues.length !== 4) {
-        // TODO add audio error
         console.log('Pick four suspects.');
         return; 
     }
@@ -428,22 +420,6 @@ function submitGuess() {
         soundOne.play();
     }
 }
-
-
-// function generatePegs() {
-//     const codeCheckDiv = document.querySelector('.codeCheck');
-//     // clear existing content
-//     codeCheckDiv.innerHTML = '';
-
-//     for( let i = 0; i < 4; i++) {
-//         const whitePeg = document.createElement('div');
-//         whitePeg.classList.add('peg');
-//         whitePeg.innerHTML = PEG.whitePeg;
-//         // set divs to inline block
-//         // whitePeg.style.display = 'inline-block';
-//         codeCheckDiv.appendChild(whitePeg);
-//     }
-// };
 
 
 function checkGuess(secretCode) {
@@ -562,6 +538,7 @@ function getWinner() {
         return;
     }
 }
+
 
 randomSounds.forEach(randomSound => {
     randomSound.addEventListener('click', function() {

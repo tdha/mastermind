@@ -83,10 +83,10 @@ Version 1.0: 2024.02.16: Project presentation and delivery.
 + No error modal when guess is submitted with less than four colours.
 
 ## Credits
-Joel and CJ for their commitment, dedication, and expertise.
-Triin for chats and a laugh.
-General Assembly for an amazing start to the course.
-Images by [pikisuperstar](https://www.freepik.com/free-vector/hand-drawn-people-avatar-collection_5183191.htm#page=2&query=faces&position=42&from_view=author&uuid=fbd8a1cd-6c97-4370-a12a-7c4e689c03fe).
+* Joel and CJ for their commitment, dedication, and expertise.
+* Triin for chats and laughs.
+* General Assembly for an amazing start to the course.
+* Images by [pikisuperstar](https://www.freepik.com/free-vector/hand-drawn-people-avatar-collection_5183191.htm#page=2&query=faces&position=42&from_view=author&uuid=fbd8a1cd-6c97-4370-a12a-7c4e689c03fe).
 
 ## Licence
 TBC.

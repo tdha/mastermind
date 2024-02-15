@@ -459,17 +459,20 @@ function checkGuess(secretCode) {
         for (let j = 0; j < unmatchedSecretIndices.length; j++) {
             const secretIndex = unmatchedSecretIndices[j];
             if (guessColor === secretCode[secretIndex]) {
-                const whitePeg = document.createElement('div');
-                whitePeg.classList.add('peg');
-                whitePeg.classList.add('whitePeg');
-                whitePeg.innerHTML = PEG.whitePeg;
-                codeCheckDiv.appendChild(whitePeg);
-                // Remove the matched indices from the unmatched lists
-                unmatchedGuessIndices.splice(i, 1);
-                unmatchedSecretIndices.splice(j, 1);
-                // Decrement loop counters to account for the removal
-                i--;
-                break;
+                // Check if the index is not already marked as matched
+                if (guessIndex !== secretIndex) {
+                    const whitePeg = document.createElement('div');
+                    whitePeg.classList.add('peg');
+                    whitePeg.classList.add('whitePeg');
+                    whitePeg.innerHTML = PEG.whitePeg;
+                    codeCheckDiv.appendChild(whitePeg);
+                    // Remove the matched indices from the unmatched lists
+                    unmatchedGuessIndices.splice(i, 1);
+                    unmatchedSecretIndices.splice(j, 1);
+                    // Decrement loop counters to account for the removal
+                    i--;
+                    break;
+                }
             }
         }
     }

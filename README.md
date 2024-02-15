@@ -45,7 +45,22 @@ At the very bottom of the screen are three (3) buttons.
 **Known bug:** The first submitted guess will also depict small dots for 'empty pegs' if that condition is met. Subsequent guesses will only show black and white pegs, with empty pegs implied by the dots' absence. 
 
 ## Features
+### Responsive layout
+This application includes the following breakpoints:
+* < 376px
+* 575px
+* 768px
+* 992px
+* > 1000px
 
+### Animated illustrations
+To build the espionage theme (uncover the 'mole' in Mastermind), character illustrations give the colours an identity. Future versions may be more sophisticated in animation and interaction beyond the low-frame animated gifs.
+
+### Audio
+Sound is added in three places.
+1. When selecting a character from the pop-up modal, a sound will play randomly from a list of soundbytes at a random interval (1 to 10 clicks). This adds a sense of chatter while selections are made quickly, or provides some interaction feedback during extended periods of thinking. Future versions will feature sound packs based on each character's personality, and will feel more conversational.
+2. The countdown time is verbalised. After each turn, the number will be announced. At count three (3), an additional soundbyte plays.
+3. Upon winning or losing, a corresponding soundbyte will play.
 
 
 

@@ -480,7 +480,7 @@ function checkGuess(secretCode) {
     const remainingPegs = 4 - (document.querySelectorAll('.peg').length);
     for (let i = 0; i < remainingPegs; i++) {
         const emptyPeg = document.createElement('div');
-        emptyPeg.classList.add('peg');
+        emptyPeg.classList.add('peg', 'emptyPeg');
         emptyPeg.innerHTML = PEG.emptyPeg;
         codeCheckDiv.appendChild(emptyPeg);
     }

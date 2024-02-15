@@ -1,5 +1,7 @@
-/*----- TODOs -----*/
-    // 
+/*----- TODO -----*/
+// checks show 4 pegs
+// clearGuess clears check pegs
+// time turnCountdown on win/lose condition (and reset it with clearGuess)
 
 /*----- CONSTANTS -----*/
 const PERSON = {
@@ -20,7 +22,7 @@ const PEG = {
     // guessColor[i] = computerColor[i] && guessPanel[i] !== computerPanel[i]
     whitePeg: '&#9675;',
     // guessColor[i] = !computerColor[i]
-    emptyPeg: '&#735;'
+    emptyPeg: '&#8210;'
 };
 
 const newGameButton = document.getElementById('refresh');
@@ -34,17 +36,22 @@ const headerGetWinner = document.querySelector('header');
 
 /*----- STATE VARIABLES -----*/
 let turnCount = 0;
-let winner; 
+let winner;
     // 'lose' = guess !== computerCode && turn === '0'; 
     // 'win' = guess === computerCode && turn > 0;
 let computerCode;
 let history;
+
+// variable to store the interval for the turn countdown
+// for when a timer (seconds) is added
+// IS THIS NEEDED RIGHT NOW?
 let turnInterval;
-    // variable to store the interval for the turn countdown.
+
 let turnCountdown = 12;
 const people = Object.keys(PERSON);
 let secretCode = generateSecretCode();
 let historySection = document.getElementById('history');
+
 
 /*----- CACHED ELEMENTS  -----*/
 let message = document.querySelector('h1');''
@@ -58,17 +65,17 @@ clearGuessButton.addEventListener('click', clearGuess);
 
 /*----- FUNCTIONS -----*/
 // guess selection modal
-const modal = document.getElementById("guessModal");
 // Get the button that opens the modal
+const modal = document.getElementById("guessModal");
+// When the user clicks on <span> (x), close the modal
 const span = document.getElementsByClassName("close")[0];
 span.addEventListener("click", function() {
     modal.style.display = "none";
-    // When the user clicks on <span> (x), close the modal
     });
+// When the user clicks anywhere outside of the modal, close it
 window.addEventListener("click", function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
-        // When the user clicks anywhere outside of the modal, close it
         }
     });
 
@@ -95,11 +102,13 @@ function modalSelect() {
 
             // Change the submit button image based on validateGuess
             if (isValid) {
-                submitGuessButtonImg.disabled = false; // Enable the button                
+                // Enable the button                
+                submitGuessButtonImg.disabled = false; 
                 submitGuessButtonImg.src = 'assets/icon-check-48-blue.png';
             } else {
                 submitGuessButtonImg.src = 'assets/icon-check-48-grey.png';
-                submitGuessButtonImg.disabled = true; // Disable the button
+                // Disable the button
+                submitGuessButtonImg.disabled = true; 
             }
 
         });
@@ -107,8 +116,8 @@ function modalSelect() {
 
     // Add event listener to each panel div to track the selected panel
     document.querySelectorAll('.guessCode > div').forEach(panel => {
+        // Check if the clicked panel is not a codeCheck panel
         panel.addEventListener('click', function() {
-            // Check if the clicked panel is not a codeCheck panel
             if (!panel.classList.contains('codeCheck')) {
                 selectedPanel = panel;
 
@@ -128,7 +137,6 @@ function modalSelect() {
 }
 
 
-    
 function clearGuess() {
     const guessCode = document.querySelector('.guessCode');
     const guessPanels = guessCode.querySelectorAll('div');
@@ -167,17 +175,18 @@ function clearGuess() {
 }
 
 
-
 init();
 
+
 function init() {
+    // Winner is cleared i.e. no winner
     winner = null;
-        // Winner is cleared i.e. no winner
+
+    // clear styles applied when win or lose condition is triggered
     headerGetWinner.style.backgroundColor = 'rgba(176, 190, 197, 0.96)';
     message.style.color = '#37474F';
     message.innerText = 'Mastermole!';
     clearGuessButtonImg.src = 'assets/icon-cancel-48.svg';
-
 
     // clear existing content in computerCode
     const computerCode = document.querySelector('.computerCode')
@@ -186,7 +195,6 @@ function init() {
     // clear existing content in guessCode
     const guessCode = document.querySelector('.guessCode')
     guessCode.innerHTML = '';
-
 
     // generate new secret code
     secretCode = generateSecretCode();
@@ -378,7 +386,7 @@ function submitGuess() {
     turnCount++;
 
     // decrement turnCountdown by turnCount
-    turnCountdown --;
+    turnCountdown--;
 
     // upddate turnCountdown display
     const turnDiv = document.querySelector('.turn > h3');
@@ -483,24 +491,27 @@ function checkGuess(secretCode) {
 
 function getWinner() {
     // Check if the player has won
-    const codeCheckDiv = document.querySelector('.codeCheck');
+    const codeCheckDiv = document.querySelector('.guessCode > .codeCheck');
     const blackPegs = codeCheckDiv.querySelectorAll('.blackPeg');
     
-    // Player wins if there are 4 black pegs and turnCountdown is greater than 0
-    if (blackPegs.length === 4 && turnCountdown > 0) {
+    console.log(turnCountdown);
+    console.log(blackPegs);
+    console.log(codeCheckDiv);
+
+    // Check if the player has four black pegs and turn countdown has not reached 0
+    if (blackPegs.length === 4) {
+        winner = true;
         // Set message to indicate player wins
         headerGetWinner.style.backgroundColor = '#C6FF00';
         message.style.color = '#1B5E20';
         message.innerText = "Player wins!";
-        // clearGuessButton.style.visibility = 'hidden';
-        // submitGuessButton.style.visibility = 'hidden';
         clearGuessButtonImg.src = 'assets/icon-cancel-48-grey.png';
-        // submitGuessButtonImg.disabled = true; // Disable the button
+
         return;
     }
     
     // Check if the computer has won
-    if (turnCountdown === 0 && !winner) {
+    if (turnCountdown === 0 && winner !== true) {
         // Set message to indicate computer wins
         headerGetWinner.style.backgroundColor = '#FF1744';
         message.style.color = '#FFFFFF';
@@ -508,7 +519,6 @@ function getWinner() {
         clearGuessButtonImg.src = 'assets/icon-cancel-48-grey.png';
         
         // Show computer's secret code
-        // TODO FIX BUG 
         const computerCodeDiv = document.querySelector('.computerCode');
         computerCodeDiv.innerHTML = '';
         for (let i = 0; i < secretCode.length; i++) {
@@ -516,7 +526,6 @@ function getWinner() {
             panelDiv.innerHTML = `<img src="${PERSON[secretCode[i]]}" alt="Portrait">`;
             computerCodeDiv.appendChild(panelDiv);
         }
-        
         return;
     }
 }

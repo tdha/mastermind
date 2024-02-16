@@ -69,8 +69,6 @@ Sound is added in three places.
 
 [Player wins screen](https://github.com/tdha/mastermind/blob/a6fe7808972fc0a4bbc158de512ce4dcbe0db358/assets/readme/mastermole%20win.png)
 
-https://github.com/tdha/mastermind/blob/a6fe7808972fc0a4bbc158de512ce4dcbe0db358/assets/readme/mastermole%20win.png
-
 ## Technologies.
 Mastermole! is built with HTML, CSS, and Javascript (JS). This application works on Chrome (Version 121.0.6167.160).
 Assets include GIF and PNG for images and MP3 for audio.

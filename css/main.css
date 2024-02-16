@@ -30,7 +30,7 @@ header {
 
 h1 {
   font-family: "Luckiest Guy", cursive;
-  font-size: 60px;
+  font-size: 48px;
   color: #37474F;
   margin-bottom: 12px;
 }
@@ -78,8 +78,8 @@ img {
 
 .container {
   position: fixed;
-  top: 330px;
-  bottom: 312px;
+  top: 239px;
+  bottom: 232px;
   width: 100%;
   display: flex;
   flex-direction: column-reverse;
@@ -98,7 +98,7 @@ img {
 }
 
 .currentTurn {
-  max-width: 1000px;
+  max-width: 600px;
 }
 
 .guessCode {
@@ -108,7 +108,6 @@ img {
 }
 
 .codeCheck {
-
   display: inline-block;
   align-self: center;
   justify-self: center;
@@ -132,7 +131,7 @@ img {
   margin: auto;
   padding: 20px;
   width: 80%;
-  max-width: 720px;
+  max-width: 420px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -207,12 +206,12 @@ img {
 
 #code {
   padding-top: 12px;
-  max-width: 1000px;
+  max-width: 600px;
 }
 
 #history {
   /* padding: 0 12px; */
-  max-width: 1000px;
+  max-width: 600px;
   flex-grow: 1;
   margin: 0 auto;
 }
@@ -255,7 +254,7 @@ img {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1000; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  padding-top: 80px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -269,7 +268,7 @@ img {
   display: flex;
   background-color: #ffffff;
   width: 80%;
-  max-width: 720px;
+  max-width: 420px;
   margin: 0 auto;
   padding: 24px 0;
   justify-content: center;
@@ -287,21 +286,29 @@ img {
       font-size: 76px;
   }
   header {
-    height: 306px;
+    height: 224px;
+    padding-top: 24px;
+
   }
   .container {
     padding: 0 12px;
-    top: 306px;
-    bottom: 306px;
+    top: 224px;
+    bottom: 224px;
     max-height: 100vh;
     width: 100%;
   }
+  .currentTurn {
+    max-width: 600px;
+  }
   #history {
-    max-width: 992px;
+    max-width: 600px;
     margin: 0 auto;
   }
+  #code {
+    max-width: 600px;
+  }
   #guess {
-    height: 306px;
+    height: 224px;
   }
 }
 
@@ -317,28 +324,43 @@ img {
     font-size: 60px;
   }
   header {
-    height: 262px;
+    height: 198px;
   }
   .container {
     padding: 0 12px;
-    top: 262px;
-    bottom: 262px;
+    top: 198px;
+    bottom: 198px;
     max-height: 100vh;
     width: 100%;
   }
+  .currentTurn {
+    max-width: 500px;
+  }
   #history {
-    max-width: 768px;
+    max-width: 500px;
     margin: 0 auto;
   }
+  #code {
+    max-width: 500px;
+  }
   #guess {
-    height: 262px;
+    height: 198px;
+  }
+  #guessModal {
+    padding-top: 80px;
+  }
+  .modalContent {
+    max-width: 360px;
+  }
+  #closeBar {
+    max-width: 360px;
   }
 }
 
 @media screen and (max-width: 575px) {
   body {
-      max-width: 575px;
-      background-size: 75%;
+    max-width: 575px;
+    background-size: 75%;
   }
   .peg {
     font-size: 26px;
@@ -347,50 +369,80 @@ img {
     font-size: 48px;
   }
   header {
-    height: 223px;
+    height: 186px;
   }
   .container {
     padding: 0 12px;
-    top: 223px;
-    bottom: 223px;
+    top: 186px;
+    bottom: 186px;
     max-height: 100vh;
     width: 100%;
   }
+  .currentTurn {
+    max-width: 420px;
+  }
   #history {
-    max-width: 575px;
+    max-width: 420px;
     margin: 0 auto;
   }
+  #code {
+    max-width: 420px;
+  }
   #guess {
-    height: 223px;
+    height: 186px;
+  }
+  #guessModal {
+    padding-top: 180px;
+  }
+  .modalContent {
+    max-width: 300px;
+  }
+  #closeBar {
+    max-width: 300px;
   }
 }
 
 @media screen and (max-width: 376px) {
   body {
-      max-width: 376px;
-      background-size: 75%;
+    max-width: 376px;
+    background-size: 75%;
   }
   .peg {
     font-size: 24px;
   }
   h3 {
     font-size: 44px;
-    header {
-    height: 183px;
-    }
-    .container {
-      padding: 0 12px;
-      top: 183px;
-      bottom: 183px;
-      max-height: 100vh;
-      width: 100%;
-    }
-    #history {
-      max-width: 376px;
-      margin: 0 auto;
-    }
-    #guess {
-      height: 183px;
-    }
-}
+  }
+  header {
+    height: 168px;
+  }
+  .container {
+    padding: 0 12px;
+    top: 168px;
+    bottom: 168px;
+    max-height: 100vh;
+    width: 100%;
+  }
+  .currentTurn {
+    max-width: 340px;
+  }
+  #history {
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  #code {
+    max-width: 340px;
+  }
+  #guess {
+    height: 168px;
+  }
+  #guessModal {
+    padding-top: 100px;
+  }
+  .modalContent {
+    max-width: 280px;
+  }
+  #closeBar {
+    max-width: 280px;
+  }
 }

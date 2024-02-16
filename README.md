@@ -63,7 +63,7 @@ Sound is added in three places.
 3. Upon winning or losing, a corresponding soundbyte will play.
 
 ## Screenshots
-[Game in progress](https://i.imgur.com/S5y00nM.png)
+[Game in progress](assets/readme/mastermole game in progress.png)
 
 [Colour selection modal](https://i.imgur.com/J3Fsdb8.png)
 

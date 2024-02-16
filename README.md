@@ -63,11 +63,13 @@ Sound is added in three places.
 3. Upon winning or losing, a corresponding soundbyte will play.
 
 ## Screenshots
-[Game in progress](assets/readme/mastermole game in progress.png)
+[Game in progress](https://github.com/tdha/mastermind/blob/a6fe7808972fc0a4bbc158de512ce4dcbe0db358/assets/readme/mastermole%20game%20in%20progress.png)
 
-[Colour selection modal](https://i.imgur.com/J3Fsdb8.png)
+[Colour selection modal](https://github.com/tdha/mastermind/blob/a6fe7808972fc0a4bbc158de512ce4dcbe0db358/assets/readme/mastermole%20modal.png)
 
-[Player wins screen](https://i.imgur.com/sRgvpL3.png)
+[Player wins screen](https://github.com/tdha/mastermind/blob/a6fe7808972fc0a4bbc158de512ce4dcbe0db358/assets/readme/mastermole%20win.png)
+
+https://github.com/tdha/mastermind/blob/a6fe7808972fc0a4bbc158de512ce4dcbe0db358/assets/readme/mastermole%20win.png
 
 ## Technologies.
 Mastermole! is built with HTML, CSS, and Javascript (JS). This application works on Chrome (Version 121.0.6167.160).

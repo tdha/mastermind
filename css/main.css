@@ -84,7 +84,8 @@ img {
   flex-direction: column-reverse;
   /* margin-top: 300px; */
   max-height: 100vh; /* Adjust as needed */
-  overflow-y: auto;
+  overflow-y: scroll;
+  /* overflow: visible; */
 }
 
 .bottom {
